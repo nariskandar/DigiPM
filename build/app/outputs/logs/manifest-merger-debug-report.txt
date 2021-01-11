@@ -1,0 +1,229 @@
+-- Merging decision tree log ---
+application
+INJECTED from D:\Project\digi_pm_skin\android\app\src\main\AndroidManifest.xml:10:5-34:19
+MERGED from [:image_picker] D:\Project\digi_pm_skin\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:10:5-20:19
+MERGED from [:image_picker] D:\Project\digi_pm_skin\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:10:5-20:19
+MERGED from [androidx.core:core:1.1.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\core-1.1.0.aar\ceb0ed300b631c62dc03252d68914ad6\AndroidManifest.xml:24:5-89
+MERGED from [androidx.core:core:1.1.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\core-1.1.0.aar\ceb0ed300b631c62dc03252d68914ad6\AndroidManifest.xml:24:5-89
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\versionedparcelable-1.1.0.aar\a05e45993b96bc1fca06e9d647880278\AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\versionedparcelable-1.1.0.aar\a05e45993b96bc1fca06e9d647880278\AndroidManifest.xml:24:5-25:19
+	android:appComponentFactory
+		ADDED from [androidx.core:core:1.1.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\core-1.1.0.aar\ceb0ed300b631c62dc03252d68914ad6\AndroidManifest.xml:24:18-86
+	android:label
+		INJECTED from D:\Project\digi_pm_skin\android\app\src\main\AndroidManifest.xml
+manifest
+ADDED from D:\Project\digi_pm_skin\android\app\src\main\AndroidManifest.xml:1:1-35:12
+INJECTED from D:\Project\digi_pm_skin\android\app\src\main\AndroidManifest.xml:1:1-35:12
+INJECTED from D:\Project\digi_pm_skin\android\app\src\main\AndroidManifest.xml:1:1-35:12
+INJECTED from D:\Project\digi_pm_skin\android\app\src\main\AndroidManifest.xml:1:1-35:12
+MERGED from D:\Project\digi_pm_skin\android\app\src\main\AndroidManifest.xml:1:1-35:12
+MERGED from [:video_player] D:\Project\digi_pm_skin\build\video_player\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:package_info] D:\Project\digi_pm_skin\build\package_info\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:sqflite] D:\Project\digi_pm_skin\build\sqflite\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:wakelock] D:\Project\digi_pm_skin\build\wakelock\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:image_picker] D:\Project\digi_pm_skin\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-22:12
+MERGED from [:flutter_plugin_android_lifecycle] D:\Project\digi_pm_skin\build\flutter_plugin_android_lifecycle\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:flutter_keyboard_visibility] D:\Project\digi_pm_skin\build\flutter_keyboard_visibility\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:flutter_plugin_pdf_viewer] D:\Project\digi_pm_skin\build\flutter_plugin_pdf_viewer\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:path_provider] D:\Project\digi_pm_skin\build\path_provider\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:phone_number] D:\Project\digi_pm_skin\build\phone_number\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:shared_preferences] D:\Project\digi_pm_skin\build\shared_preferences\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.multidex:multidex:2.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\multidex-2.0.0.aar\1e4c4023513eb23597186b93c3198e6a\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.appcompat:appcompat:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\appcompat-1.0.0.aar\ccad34498a31f8ab54770437227ffdc8\AndroidManifest.xml:17:1-22:12
+MERGED from [com.github.barteksc:android-pdf-viewer:2.8.2] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\jetified-android-pdf-viewer-2.8.2.aar\b3aa6ac22dce0d71c2954b8bb2bb8dca\AndroidManifest.xml:2:1-11:12
+MERGED from [com.github.barteksc:pdfium-android:1.7.1] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\jetified-pdfium-android-1.7.1.aar\2a0fa3d53c1563187e06b454613a4f83\AndroidManifest.xml:2:1-11:12
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\legacy-support-v4-1.0.0.aar\bbcfd38a6c17dd4316978a60d8359581\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\fragment-1.1.0.aar\f3e47d3b9d8f1eea10a7b62dc37ec413\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\vectordrawable-animated-1.0.0.aar\a36ebbd2ea086f836e618d99321365b0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\legacy-support-core-ui-1.0.0.aar\8b826d49b70e091f9c745135ef9fe938\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\legacy-support-core-utils-1.0.0.aar\b15e50fa12e7ab002ebf492be440f5d0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.vectordrawable:vectordrawable:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\vectordrawable-1.0.0.aar\500cdd8878048621312a5aaae8682c07\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\viewpager-1.0.0.aar\d4c1a1a81221939eb3a8145befee9201\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\loader-1.0.0.aar\83707246128d53fd7852e34b30f7fcca\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.activity:activity:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\activity-1.0.0.aar\f202a4d0b1fe8bb929f016803cefb2e6\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\coordinatorlayout-1.0.0.aar\f7cf0e35bbadb0e235b8457838b3e63a\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\drawerlayout-1.0.0.aar\cb5cfa334849b293a4ebb606d01980f5\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\slidingpanelayout-1.0.0.aar\795605ade45809ee309cd01ce915d2ab\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.customview:customview:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\customview-1.0.0.aar\d9e3fc573c35aa25adde02757aaa0fa2\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\swiperefreshlayout-1.0.0.aar\869bf7e726f9821352cac1f5c47756f8\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\asynclayoutinflater-1.0.0.aar\ffc0294828c26cb3c30997e62e807d28\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.media:media:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\media-1.0.0.aar\1cc1938420adb505e705fec065ecbc60\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.core:core:1.1.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\core-1.1.0.aar\ceb0ed300b631c62dc03252d68914ad6\AndroidManifest.xml:17:1-26:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.2.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\lifecycle-runtime-2.2.0.aar\c134de869acdb8a65399984515c71be4\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.savedstate:savedstate:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\savedstate-1.0.0.aar\2f36ae6397f8ebbd71e603cd004cd83a\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\lifecycle-livedata-2.0.0.aar\6997deed91540fd3504bc2946bf13555\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\lifecycle-livedata-core-2.0.0.aar\c9cdc002913e4f624dd8d83e93836dbc\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\cursoradapter-1.0.0.aar\a97dc6e1c07fddef5c353e8fe3861575\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.exifinterface:exifinterface:1.3.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\exifinterface-1.3.0.aar\6c4615536a6ce23fa20b5d20c9748527\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\core-runtime-2.0.0.aar\064485f86cf9361018ee29928873b285\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\versionedparcelable-1.1.0.aar\a05e45993b96bc1fca06e9d647880278\AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\documentfile-1.0.0.aar\dde53af60660e2eae62a683cb250186e\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\localbroadcastmanager-1.0.0.aar\3e28fbe0eb59fccd66bff7ef1ecd4f6c\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.print:print:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\print-1.0.0.aar\2feef51bc77902ee859309370f0775b1\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\lifecycle-viewmodel-2.1.0.aar\ab22efdc541d0113fa5f74eae9e60c7f\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\interpolator-1.0.0.aar\fc00900c908fb26f92f01393106e3931\AndroidManifest.xml:17:1-22:12
+MERGED from [com.google.android.exoplayer:exoplayer-hls:2.9.6] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\jetified-exoplayer-hls-2.9.6.aar\6d94ad02ed9c46e88a470b08dacdeeca\AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.exoplayer:exoplayer-dash:2.9.6] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\jetified-exoplayer-dash-2.9.6.aar\fad9c8dba18ca6f3629d7a6ef432483a\AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.exoplayer:exoplayer-smoothstreaming:2.9.6] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\jetified-exoplayer-smoothstreaming-2.9.6.aar\0a5225b46ac90c50dd8f40f2aed367b7\AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.exoplayer:exoplayer-core:2.9.6] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\jetified-exoplayer-core-2.9.6.aar\2ec02d1cfe3801bced3a9191bed66e5f\AndroidManifest.xml:17:1-26:12
+INJECTED from D:\Project\digi_pm_skin\android\app\src\debug\AndroidManifest.xml:1:1-7:12
+INJECTED from D:\Project\digi_pm_skin\android\app\src\debug\AndroidManifest.xml:1:1-7:12
+INJECTED from D:\Project\digi_pm_skin\android\app\src\debug\AndroidManifest.xml:1:1-7:12
+	package
+		ADDED from D:\Project\digi_pm_skin\android\app\src\main\AndroidManifest.xml:2:5-39
+		INJECTED from D:\Project\digi_pm_skin\android\app\src\main\AndroidManifest.xml
+		INJECTED from D:\Project\digi_pm_skin\android\app\src\debug\AndroidManifest.xml
+	android:versionName
+		INJECTED from D:\Project\digi_pm_skin\android\app\src\main\AndroidManifest.xml
+		ADDED from D:\Project\digi_pm_skin\android\app\src\main\AndroidManifest.xml:1:1-35:12
+		INJECTED from D:\Project\digi_pm_skin\android\app\src\debug\AndroidManifest.xml
+	android:versionCode
+		INJECTED from D:\Project\digi_pm_skin\android\app\src\main\AndroidManifest.xml
+		ADDED from D:\Project\digi_pm_skin\android\app\src\main\AndroidManifest.xml:1:1-35:12
+		INJECTED from D:\Project\digi_pm_skin\android\app\src\debug\AndroidManifest.xml
+	xmlns:android
+		ADDED from D:\Project\digi_pm_skin\android\app\src\main\AndroidManifest.xml:1:11-69
+uses-permission#android.permission.INTERNET
+ADDED from D:\Project\digi_pm_skin\android\app\src\main\AndroidManifest.xml:9:5-67
+MERGED from D:\Project\digi_pm_skin\android\app\src\main\AndroidManifest.xml:9:5-67
+MERGED from D:\Project\digi_pm_skin\android\app\src\main\AndroidManifest.xml:9:5-67
+	android:name
+		ADDED from D:\Project\digi_pm_skin\android\app\src\main\AndroidManifest.xml:9:22-64
+uses-sdk
+INJECTED from D:\Project\digi_pm_skin\android\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from D:\Project\digi_pm_skin\android\app\src\main\AndroidManifest.xml
+INJECTED from D:\Project\digi_pm_skin\android\app\src\main\AndroidManifest.xml
+MERGED from [:video_player] D:\Project\digi_pm_skin\build\video_player\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:video_player] D:\Project\digi_pm_skin\build\video_player\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:package_info] D:\Project\digi_pm_skin\build\package_info\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:package_info] D:\Project\digi_pm_skin\build\package_info\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:sqflite] D:\Project\digi_pm_skin\build\sqflite\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:sqflite] D:\Project\digi_pm_skin\build\sqflite\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:wakelock] D:\Project\digi_pm_skin\build\wakelock\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:wakelock] D:\Project\digi_pm_skin\build\wakelock\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:image_picker] D:\Project\digi_pm_skin\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:image_picker] D:\Project\digi_pm_skin\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:flutter_plugin_android_lifecycle] D:\Project\digi_pm_skin\build\flutter_plugin_android_lifecycle\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:flutter_plugin_android_lifecycle] D:\Project\digi_pm_skin\build\flutter_plugin_android_lifecycle\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:flutter_keyboard_visibility] D:\Project\digi_pm_skin\build\flutter_keyboard_visibility\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:flutter_keyboard_visibility] D:\Project\digi_pm_skin\build\flutter_keyboard_visibility\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:flutter_plugin_pdf_viewer] D:\Project\digi_pm_skin\build\flutter_plugin_pdf_viewer\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:flutter_plugin_pdf_viewer] D:\Project\digi_pm_skin\build\flutter_plugin_pdf_viewer\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:path_provider] D:\Project\digi_pm_skin\build\path_provider\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:path_provider] D:\Project\digi_pm_skin\build\path_provider\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:phone_number] D:\Project\digi_pm_skin\build\phone_number\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:phone_number] D:\Project\digi_pm_skin\build\phone_number\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:shared_preferences] D:\Project\digi_pm_skin\build\shared_preferences\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:shared_preferences] D:\Project\digi_pm_skin\build\shared_preferences\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [androidx.multidex:multidex:2.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\multidex-2.0.0.aar\1e4c4023513eb23597186b93c3198e6a\AndroidManifest.xml:20:5-43
+MERGED from [androidx.multidex:multidex:2.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\multidex-2.0.0.aar\1e4c4023513eb23597186b93c3198e6a\AndroidManifest.xml:20:5-43
+MERGED from [androidx.appcompat:appcompat:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\appcompat-1.0.0.aar\ccad34498a31f8ab54770437227ffdc8\AndroidManifest.xml:20:5-44
+MERGED from [androidx.appcompat:appcompat:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\appcompat-1.0.0.aar\ccad34498a31f8ab54770437227ffdc8\AndroidManifest.xml:20:5-44
+MERGED from [com.github.barteksc:android-pdf-viewer:2.8.2] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\jetified-android-pdf-viewer-2.8.2.aar\b3aa6ac22dce0d71c2954b8bb2bb8dca\AndroidManifest.xml:7:5-9:41
+MERGED from [com.github.barteksc:android-pdf-viewer:2.8.2] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\jetified-android-pdf-viewer-2.8.2.aar\b3aa6ac22dce0d71c2954b8bb2bb8dca\AndroidManifest.xml:7:5-9:41
+MERGED from [com.github.barteksc:pdfium-android:1.7.1] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\jetified-pdfium-android-1.7.1.aar\2a0fa3d53c1563187e06b454613a4f83\AndroidManifest.xml:7:5-9:41
+MERGED from [com.github.barteksc:pdfium-android:1.7.1] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\jetified-pdfium-android-1.7.1.aar\2a0fa3d53c1563187e06b454613a4f83\AndroidManifest.xml:7:5-9:41
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\legacy-support-v4-1.0.0.aar\bbcfd38a6c17dd4316978a60d8359581\AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\legacy-support-v4-1.0.0.aar\bbcfd38a6c17dd4316978a60d8359581\AndroidManifest.xml:20:5-44
+MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\fragment-1.1.0.aar\f3e47d3b9d8f1eea10a7b62dc37ec413\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\fragment-1.1.0.aar\f3e47d3b9d8f1eea10a7b62dc37ec413\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\vectordrawable-animated-1.0.0.aar\a36ebbd2ea086f836e618d99321365b0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\vectordrawable-animated-1.0.0.aar\a36ebbd2ea086f836e618d99321365b0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\legacy-support-core-ui-1.0.0.aar\8b826d49b70e091f9c745135ef9fe938\AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\legacy-support-core-ui-1.0.0.aar\8b826d49b70e091f9c745135ef9fe938\AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\legacy-support-core-utils-1.0.0.aar\b15e50fa12e7ab002ebf492be440f5d0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\legacy-support-core-utils-1.0.0.aar\b15e50fa12e7ab002ebf492be440f5d0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\vectordrawable-1.0.0.aar\500cdd8878048621312a5aaae8682c07\AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\vectordrawable-1.0.0.aar\500cdd8878048621312a5aaae8682c07\AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\viewpager-1.0.0.aar\d4c1a1a81221939eb3a8145befee9201\AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\viewpager-1.0.0.aar\d4c1a1a81221939eb3a8145befee9201\AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\loader-1.0.0.aar\83707246128d53fd7852e34b30f7fcca\AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\loader-1.0.0.aar\83707246128d53fd7852e34b30f7fcca\AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\activity-1.0.0.aar\f202a4d0b1fe8bb929f016803cefb2e6\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\activity-1.0.0.aar\f202a4d0b1fe8bb929f016803cefb2e6\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\coordinatorlayout-1.0.0.aar\f7cf0e35bbadb0e235b8457838b3e63a\AndroidManifest.xml:20:5-44
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\coordinatorlayout-1.0.0.aar\f7cf0e35bbadb0e235b8457838b3e63a\AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\drawerlayout-1.0.0.aar\cb5cfa334849b293a4ebb606d01980f5\AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\drawerlayout-1.0.0.aar\cb5cfa334849b293a4ebb606d01980f5\AndroidManifest.xml:20:5-44
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\slidingpanelayout-1.0.0.aar\795605ade45809ee309cd01ce915d2ab\AndroidManifest.xml:20:5-44
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\slidingpanelayout-1.0.0.aar\795605ade45809ee309cd01ce915d2ab\AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\customview-1.0.0.aar\d9e3fc573c35aa25adde02757aaa0fa2\AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\customview-1.0.0.aar\d9e3fc573c35aa25adde02757aaa0fa2\AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\swiperefreshlayout-1.0.0.aar\869bf7e726f9821352cac1f5c47756f8\AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\swiperefreshlayout-1.0.0.aar\869bf7e726f9821352cac1f5c47756f8\AndroidManifest.xml:20:5-44
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\asynclayoutinflater-1.0.0.aar\ffc0294828c26cb3c30997e62e807d28\AndroidManifest.xml:20:5-44
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\asynclayoutinflater-1.0.0.aar\ffc0294828c26cb3c30997e62e807d28\AndroidManifest.xml:20:5-44
+MERGED from [androidx.media:media:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\media-1.0.0.aar\1cc1938420adb505e705fec065ecbc60\AndroidManifest.xml:20:5-44
+MERGED from [androidx.media:media:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\media-1.0.0.aar\1cc1938420adb505e705fec065ecbc60\AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.1.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\core-1.1.0.aar\ceb0ed300b631c62dc03252d68914ad6\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core:1.1.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\core-1.1.0.aar\ceb0ed300b631c62dc03252d68914ad6\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.2.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\lifecycle-runtime-2.2.0.aar\c134de869acdb8a65399984515c71be4\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.2.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\lifecycle-runtime-2.2.0.aar\c134de869acdb8a65399984515c71be4\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\savedstate-1.0.0.aar\2f36ae6397f8ebbd71e603cd004cd83a\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\savedstate-1.0.0.aar\2f36ae6397f8ebbd71e603cd004cd83a\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\lifecycle-livedata-2.0.0.aar\6997deed91540fd3504bc2946bf13555\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\lifecycle-livedata-2.0.0.aar\6997deed91540fd3504bc2946bf13555\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\lifecycle-livedata-core-2.0.0.aar\c9cdc002913e4f624dd8d83e93836dbc\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\lifecycle-livedata-core-2.0.0.aar\c9cdc002913e4f624dd8d83e93836dbc\AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\cursoradapter-1.0.0.aar\a97dc6e1c07fddef5c353e8fe3861575\AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\cursoradapter-1.0.0.aar\a97dc6e1c07fddef5c353e8fe3861575\AndroidManifest.xml:20:5-44
+MERGED from [androidx.exifinterface:exifinterface:1.3.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\exifinterface-1.3.0.aar\6c4615536a6ce23fa20b5d20c9748527\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.exifinterface:exifinterface:1.3.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\exifinterface-1.3.0.aar\6c4615536a6ce23fa20b5d20c9748527\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\core-runtime-2.0.0.aar\064485f86cf9361018ee29928873b285\AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\core-runtime-2.0.0.aar\064485f86cf9361018ee29928873b285\AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\versionedparcelable-1.1.0.aar\a05e45993b96bc1fca06e9d647880278\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\versionedparcelable-1.1.0.aar\a05e45993b96bc1fca06e9d647880278\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\documentfile-1.0.0.aar\dde53af60660e2eae62a683cb250186e\AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\documentfile-1.0.0.aar\dde53af60660e2eae62a683cb250186e\AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\localbroadcastmanager-1.0.0.aar\3e28fbe0eb59fccd66bff7ef1ecd4f6c\AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\localbroadcastmanager-1.0.0.aar\3e28fbe0eb59fccd66bff7ef1ecd4f6c\AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\print-1.0.0.aar\2feef51bc77902ee859309370f0775b1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\print-1.0.0.aar\2feef51bc77902ee859309370f0775b1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\lifecycle-viewmodel-2.1.0.aar\ab22efdc541d0113fa5f74eae9e60c7f\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\lifecycle-viewmodel-2.1.0.aar\ab22efdc541d0113fa5f74eae9e60c7f\AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\interpolator-1.0.0.aar\fc00900c908fb26f92f01393106e3931\AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\interpolator-1.0.0.aar\fc00900c908fb26f92f01393106e3931\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.exoplayer:exoplayer-hls:2.9.6] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\jetified-exoplayer-hls-2.9.6.aar\6d94ad02ed9c46e88a470b08dacdeeca\AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.android.exoplayer:exoplayer-hls:2.9.6] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\jetified-exoplayer-hls-2.9.6.aar\6d94ad02ed9c46e88a470b08dacdeeca\AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.android.exoplayer:exoplayer-dash:2.9.6] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\jetified-exoplayer-dash-2.9.6.aar\fad9c8dba18ca6f3629d7a6ef432483a\AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.android.exoplayer:exoplayer-dash:2.9.6] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\jetified-exoplayer-dash-2.9.6.aar\fad9c8dba18ca6f3629d7a6ef432483a\AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.android.exoplayer:exoplayer-smoothstreaming:2.9.6] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\jetified-exoplayer-smoothstreaming-2.9.6.aar\0a5225b46ac90c50dd8f40f2aed367b7\AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.android.exoplayer:exoplayer-smoothstreaming:2.9.6] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\jetified-exoplayer-smoothstreaming-2.9.6.aar\0a5225b46ac90c50dd8f40f2aed367b7\AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.android.exoplayer:exoplayer-core:2.9.6] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\jetified-exoplayer-core-2.9.6.aar\2ec02d1cfe3801bced3a9191bed66e5f\AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.android.exoplayer:exoplayer-core:2.9.6] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\jetified-exoplayer-core-2.9.6.aar\2ec02d1cfe3801bced3a9191bed66e5f\AndroidManifest.xml:20:5-22:41
+INJECTED from D:\Project\digi_pm_skin\android\app\src\debug\AndroidManifest.xml
+INJECTED from D:\Project\digi_pm_skin\android\app\src\debug\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from D:\Project\digi_pm_skin\android\app\src\main\AndroidManifest.xml
+		INJECTED from D:\Project\digi_pm_skin\android\app\src\debug\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from D:\Project\digi_pm_skin\android\app\src\main\AndroidManifest.xml
+		INJECTED from D:\Project\digi_pm_skin\android\app\src\debug\AndroidManifest.xml
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from [:image_picker] D:\Project\digi_pm_skin\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-80
+	android:name
+		ADDED from [:image_picker] D:\Project\digi_pm_skin\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:7:22-77
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from [:image_picker] D:\Project\digi_pm_skin\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:8:5-81
+	android:name
+		ADDED from [:image_picker] D:\Project\digi_pm_skin\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:8:22-78
+provider#io.flutter.plugins.imagepicker.ImagePickerFileProvider
+ADDED from [:image_picker] D:\Project\digi_pm_skin\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:11:9-19:20
+	android:grantUriPermissions
+		ADDED from [:image_picker] D:\Project\digi_pm_skin\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:15:13-47
+	android:authorities
+		ADDED from [:image_picker] D:\Project\digi_pm_skin\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:13:13-74
+	android:exported
+		ADDED from [:image_picker] D:\Project\digi_pm_skin\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:14:13-37
+	android:name
+		ADDED from [:image_picker] D:\Project\digi_pm_skin\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:12:13-82
+meta-data#android.support.FILE_PROVIDER_PATHS
+ADDED from [:image_picker] D:\Project\digi_pm_skin\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:16:13-18:75
+	android:resource
+		ADDED from [:image_picker] D:\Project\digi_pm_skin\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:18:17-72
+	android:name
+		ADDED from [:image_picker] D:\Project\digi_pm_skin\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:17:17-67
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from [com.google.android.exoplayer:exoplayer-core:2.9.6] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\jetified-exoplayer-core-2.9.6.aar\2ec02d1cfe3801bced3a9191bed66e5f\AndroidManifest.xml:24:5-79
+	android:name
+		ADDED from [com.google.android.exoplayer:exoplayer-core:2.9.6] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\jetified-exoplayer-core-2.9.6.aar\2ec02d1cfe3801bced3a9191bed66e5f\AndroidManifest.xml:24:22-76
