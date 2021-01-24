@@ -30,7 +30,7 @@ class _TimelineAbnormalityState extends State<TimelineAbnormality>{
     super.initState();
     getExecutionStep();
     getDataAbnormality(ewoId);
-    getColor();
+    // getColor();
   }
 
   void getExecutionStep() async {
@@ -40,11 +40,11 @@ class _TimelineAbnormalityState extends State<TimelineAbnormality>{
     });
   }
 
-  void getColor() {
-    dataAbnormality.forEach((element) {
-      element['created_by'] == null ? Colors.blue  : Colors.red;
-    });
-  }
+  // void getColor() {
+  //   dataAbnormality.forEach((element) {
+  //     element['created_by'] == null ? Colors.blue  : Colors.red;
+  //   });
+  // }
 
   void getDataAbnormality(dynamic ewoId) async {
     var listDataAbnormality = await Api.getTimeline(ewoId);
@@ -60,9 +60,6 @@ class _TimelineAbnormalityState extends State<TimelineAbnormality>{
           appBar: AppBar(title: Text('Histocical Submission'),),
           body: Column(
             children: <Widget>[
-              FlatButton(child: Text('Print'), onPressed: () {
-                getColor();
-              },),
               Container(
                 decoration: BoxDecoration(
                   color: Colors.black12,
@@ -109,6 +106,14 @@ class _TimelineAbnormalityState extends State<TimelineAbnormality>{
                           ],
                         ),
                       ),
+                      // RaisedButton(
+                      //   child: Text('Print'),
+                      //   onPressed: () {
+                      //     dataAbnormality.forEach((element) {
+                      //       print(element['created_at']);
+                      //     });
+                      //   },
+                      // )
                     ],
                   ),
                 ),

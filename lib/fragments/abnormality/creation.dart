@@ -1,7 +1,6 @@
 import 'package:digi_pm_skin/provider/digiPMProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:digi_pm_skin/fragments/abnormality/submissionData.dart';
 
 class Creation extends StatefulWidget {
   @override
@@ -10,7 +9,6 @@ class Creation extends StatefulWidget {
 
 class _CreationState extends State<Creation> {
   TextEditingController controller;
-  var submissionData = SubmissionData.getData;
 
   @override
   void initState() {
@@ -62,79 +60,79 @@ class _CreationState extends State<Creation> {
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
-                      Expanded(
-                        child: ListView.builder(
-                          // scrollDirection: Axis.horizontal,
-                            itemCount: submissionData.length,
-                            itemBuilder: (context, index) {
-                              return Container(
-                                padding: EdgeInsets.fromLTRB(10, 8, 10, 10),
-                                height: 200,
-                                width: double.maxFinite,
-                                child: Card(
-                                  elevation: 5,
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                        border: Border(
-                                          top: BorderSide(
-                                            width: 2.0,
-                                            color: Color.fromRGBO(18, 37, 63, 1.0),
-                                          ),
-                                        )),
-                                    child: Padding(
-                                      padding: EdgeInsets.all(7),
-                                      child: Stack(
-                                        children: <Widget>[
-                                          Align(
-                                            alignment: Alignment.centerRight,
-                                            child: Stack(
-                                              children: <Widget>[
-                                                Align(
-                                                  alignment: Alignment.topRight,
-                                                  child: sDate(),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets.only(
-                                                      left: 5, top: 5),
-                                                  child: Column(
-                                                    children: <Widget>[
-                                                      Row(
-                                                        children: <Widget>[
-                                                          sIcon(
-                                                              submissionData[index]),
-                                                          SizedBox(
-                                                            height: 10,
-                                                          ),
-                                                          sName(),
-                                                          Spacer(),
-                                                          SizedBox(
-                                                            width: 10,
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      SizedBox(
-                                                        height: 10,
-                                                      ),
-                                                      Row(
-                                                        children: <Widget>[
-                                                          sDescription()
-                                                        ],
-                                                      ),
-                                                      sConfirm()
-                                                    ],
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              );
-                            }),
-                      ),
+                      // Expanded(
+                      //   child: ListView.builder(
+                      //     // scrollDirection: Axis.horizontal,
+                      //       itemCount: submissionData.length,
+                      //       itemBuilder: (context, index) {
+                      //         return Container(
+                      //           padding: EdgeInsets.fromLTRB(10, 8, 10, 10),
+                      //           height: 200,
+                      //           width: double.maxFinite,
+                      //           child: Card(
+                      //             elevation: 5,
+                      //             child: Container(
+                      //               decoration: BoxDecoration(
+                      //                   border: Border(
+                      //                     top: BorderSide(
+                      //                       width: 2.0,
+                      //                       color: Color.fromRGBO(18, 37, 63, 1.0),
+                      //                     ),
+                      //                   )),
+                      //               child: Padding(
+                      //                 padding: EdgeInsets.all(7),
+                      //                 child: Stack(
+                      //                   children: <Widget>[
+                      //                     Align(
+                      //                       alignment: Alignment.centerRight,
+                      //                       child: Stack(
+                      //                         children: <Widget>[
+                      //                           Align(
+                      //                             alignment: Alignment.topRight,
+                      //                             child: sDate(),
+                      //                           ),
+                      //                           Padding(
+                      //                             padding: const EdgeInsets.only(
+                      //                                 left: 5, top: 5),
+                      //                             child: Column(
+                      //                               children: <Widget>[
+                      //                                 Row(
+                      //                                   children: <Widget>[
+                      //                                     sIcon(
+                      //                                         submissionData[index]),
+                      //                                     SizedBox(
+                      //                                       height: 10,
+                      //                                     ),
+                      //                                     sName(),
+                      //                                     Spacer(),
+                      //                                     SizedBox(
+                      //                                       width: 10,
+                      //                                     ),
+                      //                                   ],
+                      //                                 ),
+                      //                                 SizedBox(
+                      //                                   height: 10,
+                      //                                 ),
+                      //                                 Row(
+                      //                                   children: <Widget>[
+                      //                                     sDescription()
+                      //                                   ],
+                      //                                 ),
+                      //                                 sConfirm()
+                      //                               ],
+                      //                             ),
+                      //                           ),
+                      //                         ],
+                      //                       ),
+                      //                     ),
+                      //                   ],
+                      //                 ),
+                      //               ),
+                      //             ),
+                      //           ),
+                      //         );
+                      //       }),
+                      // ),
                     ],
                   ),
                 ),

@@ -406,6 +406,7 @@ class DigiPMProvider extends ChangeNotifier {
     for (var i = 0; i < photo.length; i++) {
       if (i == counter && photo[i]['img_path'] == null) {
         newPhoto.add({'img_path': image.path, 'img': image});
+        // print ({'img_path': image.path, 'img': image});
       } else {
         newPhoto.add(photo[i]);
       }
@@ -435,6 +436,7 @@ class DigiPMProvider extends ChangeNotifier {
     var prefs = await SharedPreferences.getInstance();
     data['payload']['id_person'] = prefs.getString("id_user");
     print(data['payload']);
+
     return Api.saveExecution(data);
   }
 

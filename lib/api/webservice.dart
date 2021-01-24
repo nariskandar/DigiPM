@@ -11,7 +11,9 @@ class Api {
       Endpoint.BASE_URL_LOCAL + "/assets/img/profile_pic";
   static const BASE_URL_PIC_EXE =
       Endpoint.BASE_URL_LOCAL + "/assets/img/img_execution/";
+  static const BASE_URL_PM03 = Endpoint.BASE_URL_LOCAL + "/assets/img/abnormality/";
   static const BASE_URL_RAW = Endpoint.BASE_URL_LOCAL;
+  // static const BASE_URL_PIC_PM03 = Endpoint.BASE_URL_LOCAL + "assets/img//"
   static const PORT = Endpoint.BASE_URL_MULTI_PORT;
   static const ENV = "dev";
   static const SERVER = "localhost";
@@ -149,31 +151,81 @@ class Api {
 
 
 
-  static Future<dynamic> saveAbnormalityForm1(data) async {
-    final response = await http.post("$BASE_URL/api/save_abnormality",
+  static Future<dynamic> saveAbnormalityForm1(data, [File file]) async {
+    var request = http.MultipartRequest(
+        "POST", Uri.parse("$BASE_URL/abnormality/save_abnormality"));
+
+    if (file != null){
+      var picture = await http.MultipartFile.fromPath("picture", file.path);
+      request.files.add(picture);
+    }
+
+    request.fields["payload"] = json.encode(data);
+    var response = await request.send();
+
+    var responseData = await response.stream.toBytes();
+
+    var responseString = String.fromCharCodes(responseData);
+    return responseString;
+  }
+
+  static Future<dynamic> saveAnalysis(data, [File file]) async {
+    var request = http.MultipartRequest(
+      "POST", Uri.parse("$BASE_URL/abnormality/save_analysis"));
+
+    if(file != null ){
+      var picture = await http.MultipartFile.fromPath("picture", file.path);
+      request.files.add(picture);
+    }
+    request.fields["payload"] = json.encode(data);
+    var response = await request.send();
+    var responseData = await response.stream.toBytes();
+    var responseString = String.fromCharCodes(responseData);
+    return responseString;
+
+  }
+
+
+
+  static Future<dynamic> saveSeverity(data) async{
+    var request = await http.post("$BASE_URL/abnormality/save_severity",
         body: {'payload' : json.encode(data)});
-    return json.decode(response.body);
+    return json.decode(request.body);
   }
 
   static Future<dynamic> saveAbnormalityForm2(data) async {
-    final response = await http.post("$BASE_URL/api/save_abnormality_question",
+    final response = await http.post("$BASE_URL/abnormality/save_abnormality_question",
         body: {'payload' : json.encode(data)});
     return json.decode(response.body);
   }
 
+  static Future<dynamic> saveAbnormalityApproved(data) async {
+    final response = await  http.post("$BASE_URL/abnormality/save_abnormality_approved",
+        body: {'payload' : json.encode(data)});
+    return json.decode(response.body);
+  }
 
+  static Future<dynamic> deleteAbnormality(id) async {
+    final response = await http.post("$BASE_URL/abnormality/delete_abnormality?id=$id");
+    return json.decode(response.body);
+  }
 
-  static Future<dynamic> saveAbnormality(data) async {
+  static Future<dynamic> saveAbnormality(data, File file) async {
+
       var request = http.MultipartRequest(
-          "POST", Uri.parse("$BASE_URL/api/save_abnormality"));
+          "POST", Uri.parse("$BASE_URL/api/savetes"));
 
-      if (data['before'][0]['img_path'] != null) {
-        var picBefore0 = await http.MultipartFile.fromPath(
-            "pic_before0", data['before'][0]['img_path'].toString());
-        request.files.add(picBefore0);
-      }
+      var picture = await http.MultipartFile.fromPath("picture", file.path);
+      request.files.add(picture);
 
-      request.fields["payload"] = json.encode(data['payload']);
+      request.fields["payload"] = json.encode(data);
+      var response = await request.send();
+
+      var responseData = await response.stream.toBytes();
+      var responseString = String.fromCharCodes(responseData);
+
+      return responseString;
+
   }
 
   static Future<dynamic> getUserlogin(id) async {
@@ -183,33 +235,62 @@ class Api {
   }
 
   static Future<dynamic> getEwoList([ewoId]) async {
+
     if (ewoId != null){
-      final response = await http.get("$BASE_URL/data/getEwo?ewoId=$ewoId");
+      final response = await http.get("$BASE_URL/abnormality/getEwo?ewoId=$ewoId");
       return json.decode(response.body);
     } else {
-      final response = await http.get("$BASE_URL/data/getEwo");
+      final response = await http.get("$BASE_URL/abnormality/getEwo");
       return json.decode(response.body);
     }
 
   }
 
+  static Future<dynamic> getEarlyQuestion(ewoId) async {
+    final response = await http.get("$BASE_URL/abnormality/getEarlyQuestion?ewoId=$ewoId");
+    return json.decode(response.body);
+  }
+
   static Future<dynamic> getTimeline(ewoId) async {
-    final response = await http.get("$BASE_URL/data/getTimeline?ewoId=$ewoId");
+    final response = await http.get("$BASE_URL/abnormality/getTimeline?ewoId=$ewoId");
     return json.decode(response.body);
   }
 
   static Future<dynamic> getExecutionStep() async {
-    final request = await http.get("$BASE_URL/data/getExecutionStep");
+    final request = await http.get("$BASE_URL/abnormality/getExecutionStep");
     return json.decode(request.body);
   }
 
   static Future<dynamic> getSbu() async {
-    final response = await http.get("$BASE_URL/data/getSbu");
+    final response = await http.get("$BASE_URL/abnormality/getSbu");
     return json.decode(response.body);
   }
 
+  static Future<dynamic> getJustification([String level1, String level2, String suggestion]) async {
+
+    if (level1 != null && level2 == null && suggestion == null) {
+      final response = await http.get("$BASE_URL/abnormality/get_justification?level_1=$level1");
+      return json.decode(response.body);
+    }
+    if (level1 != null && level2 != null && suggestion == null) {
+      final response = await http.get("$BASE_URL/abnormality/get_justification?level_1=$level1&level_2=$level2");
+      return json.decode(response.body);
+    }
+
+    if(level1 != null && level2 != null && suggestion != null){
+      final response = await http.get("$BASE_URL/abnormality/get_justification?level_1=$level1&level_2=$level2&suggestion=$suggestion");
+      return json.decode(response.body);
+    }
+
+    if (level1 == null && level2 == null && suggestion == null){
+      final response = await http.get("$BASE_URL/abnormality/get_justification");
+      return json.decode(response.body);
+    }
+
+  }
+
   static Future<dynamic> getAutoNumber() async {
-    final response = await http.get("$BASE_URL/data/getAutoNumber");
+    final response = await http.get("$BASE_URL/abnormality/getAutoNumber");
     return response.body;
   }
 
@@ -219,38 +300,48 @@ class Api {
   }
 
   static Future<dynamic> getLine(sbu) async {
-    final response = await http.post("$BASE_URL/data/getLine?sbu=$sbu");
+    final response = await http.post("$BASE_URL/abnormality/getLine?sbu=$sbu");
     return json.decode(response.body);
   }
 
-  static Future<dynamic> getMachine(line) async {
-    final response = await http.post("$BASE_URL/data/getMachine?line=$line");
+  static Future<dynamic> getMachine(sbu, line) async {
+    final response = await http.post("$BASE_URL/abnormality/getMachine?sbu=$sbu&line=$line");
     return json.decode(response.body);
   }
 
   static Future<dynamic> getAllDate() async {
-    final response = await http.get("$BASE_URL/data/getAllDate");
+    final response = await http.get("$BASE_URL/abnormality/getAllDate");
     return json.decode(response.body);
   }
 
-  static Future<dynamic> getActivity() async {
-    final response = await http.get("$BASE_URL/data/getActivityType");
-    return json.decode(response.body);
+  static Future<dynamic> getActivity([pmat_description]) async {
+    if (pmat_description != null){
+      final response = await http.get("$BASE_URL/abnormality/getActivityType?pmat_description=$pmat_description");
+      return json.decode(response.body);
+    } else {
+      final response = await http.get("$BASE_URL/abnormality/getActivityType");
+      return json.decode(response.body);
+    }
   }
 
   static Future<dynamic> getPillar(id) async {
-    final response = await http.post("$BASE_URL/data/getPillar?id=$id");
+    final response = await http.post("$BASE_URL/abnormality/getPillar?id=$id");
     return json.decode(response.body);
   }
 
-  static Future<dynamic> getUnit(machine) async {
-    final response = await http.post("$BASE_URL/data/getUnit?machine=$machine");
+  static Future<dynamic> getUnit(sbu,line, machine) async {
+    final response = await http.post("$BASE_URL/abnormality/getUnit?sbu=$sbu&line=$line&machine=$machine");
     return json.decode(response.body);
   }
 
-  static Future<dynamic> getSubUnit(unit) async {
-    final response = await http.post("$BASE_URL/data/getSub?unit=$unit");
+  static Future<dynamic> getSubUnit(sbu, line, machine, unit) async {
+    final response = await http.post("$BASE_URL/abnormality/getSub?sbu=$sbu&line=$line&machine=$machine&unit=$unit");
     return json.decode(response.body);
+  }
+
+  static Future<dynamic> getDataSeverity(double scale_one, double scale_two, String type) async {
+      final response = await http.post("$BASE_URL/abnormality/getDataSeverity?scale_one=$scale_one&scale_two=$scale_two&type=$type");
+      return json.decode(response.body);
   }
 
   static Future<Map<String, dynamic>> login(data) async {

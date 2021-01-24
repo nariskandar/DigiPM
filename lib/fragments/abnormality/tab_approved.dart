@@ -1,56 +1,51 @@
-import 'dart:async';
+import 'dart:convert';
+import 'dart:math';
+
 import 'package:digi_pm_skin/api/webservice.dart';
 import 'package:digi_pm_skin/fragments/abnormality/edit_abnormality_form1.dart';
-import 'package:digi_pm_skin/fragments/abnormality/abnormality_tab.dart';
-import 'package:digi_pm_skin/fragments/abnormality/tab_approved.dart';
+import 'package:async/async.dart';
+import 'package:convert/convert.dart';
+import 'package:http/http.dart' as http;
 import 'package:digi_pm_skin/provider/digiPMProvider.dart';
 import 'package:digi_pm_skin/util/util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-import 'package:incrementally_loading_listview/incrementally_loading_listview.dart';
-
-
-import 'package:digi_pm_skin/fragments/abnormality/abnormality_home.dart';
-
 import 'package:digi_pm_skin/fragments/abnormality/abnormality_form1.dart';
 import 'package:digi_pm_skin/fragments/abnormality/timeline_abnormality.dart';
 
-class TabSubmitted extends StatefulWidget {
+class TabApproved extends StatefulWidget {
+  // String flag;
+
+  // TabApproved({Key key, @required this.flag}) : super(key: key);
 
   @override
-  _TabSubmittedState createState() => _TabSubmittedState();
+  _TabApprovedState createState() => _TabApprovedState();
 }
 
-class _TabSubmittedState extends State<TabSubmitted> {
+class _TabApprovedState extends State<TabApproved> {
 
   List _dataEwo;
-  String _valEmployeeId;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     getEwo();
-    getSbu();
-    _setEmployee();
     dataewo;
   }
 
-  List <Map<String, dynamic>> dataewo = [];
+List <Map<String, dynamic>> dataewo = [];
 
   void getEwo() async {
     var listDataLine = await Api.getEwoList();
     setState(() {
       _dataEwo = listDataLine;
       _dataEwo.forEach((element) {
-        if (element['approve_by'] != null){
+        if (element['approve_by'] == null){
           return;
         } else {
           setState(() {
-            print(element);
             dataewo.add(element);
           });
         }
@@ -59,21 +54,11 @@ class _TabSubmittedState extends State<TabSubmitted> {
   }
 
   List <dynamic> _dataSbu = List();
-  List <dynamic> _dataLine = List();
-
-  String _valSbu, _valLine;
-
+  String _valSbu;
   void getSbu() async {
     var listDataSbu = await Api.getSbu();
     setState(() {
       _dataSbu = listDataSbu;
-    });
-  }
-
-  void getLine(String sbu) async {
-    var listDataLine = await Api.getLine(sbu);
-    setState(() {
-      _dataLine = listDataLine;
     });
   }
 
@@ -91,7 +76,6 @@ class _TabSubmittedState extends State<TabSubmitted> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-
                     Padding(
                       padding: EdgeInsets.only(left: 15),
                       child: Text('Filter By :', style: TextStyle(fontWeight: FontWeight.w700),),
@@ -121,16 +105,16 @@ class _TabSubmittedState extends State<TabSubmitted> {
                       child: DropdownButton(
                         isExpanded: true,
                         hint: Text("-- SELECT LINE --", style: TextStyle(fontSize: 12),),
-                        value: _valLine,
-                        items: _dataLine.map((item) {
+                        value: _valSbu,
+                        items: _dataSbu.map((item) {
                           return DropdownMenuItem(
-                            child: Text(item['line']),
-                            value: item['line'],
+                            child: Text(item['sbu']),
+                            value: item['sbu'],
                           );
                         }).toList(),
                         onChanged: (value) {
                           setState(() {
-                            _valLine = value;
+                            _valSbu = value;
                           });
                         },
                       ),
@@ -256,75 +240,31 @@ class _TabSubmittedState extends State<TabSubmitted> {
                                                   )
                                                 ],
                                               ),
-                                              Padding(
-                                                padding: EdgeInsets.only(top: 20),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                                  children: <Widget>[
-                                                    RaisedButton(
-                                                      onPressed: () {
-                                                        Navigator.push(context, MaterialPageRoute(
-                                                          builder: (context) => TimelineAbnormality(
-                                                              ewoId: dataewo[index]['id'],
-                                                              ewoNumber: dataewo[index]['ewo_number']
-                                                          )
-                                                        ));
-                                                      },
-                                                      textColor: Colors.white,
-                                                      color: Colors.grey,
-                                                      padding:
-                                                      const EdgeInsets.all(
-                                                          8.0),
-                                                      child: new Text(
-                                                        "History",
-                                                      ),
-                                                    ),
-                                                    SizedBox(
-                                                      width: 5,
-                                                    ),
-                                                    RaisedButton(
-                                                      onPressed: () {
-                                                        onApproved(
-                                                            context,
-                                                            "Confirmation",
-                                                            "Whether you will do approval for\n" +
-                                                                dataewo[index][
-                                                                'ewo_number'],
-                                                            dataewo[index],
-                                                            _valEmployeeId);
-                                                      },
-                                                      textColor: Colors.white,
-                                                      color: Colors.red,
-                                                      padding:
-                                                      const EdgeInsets.all(
-                                                          8.0),
-                                                      child: new Text(
-                                                        "Approved",
-                                                      ),
-                                                    ),
-                                                    SizedBox(
-                                                      width: 5,
-                                                    ),
-                                                    RaisedButton(
-                                                      padding:
-                                                      EdgeInsets.all(8.0),
-                                                      textColor: Colors.white,
-                                                      color: Colors.lightBlue,
-                                                      onPressed: () {
-
-                                                        Navigator.push(
+                                              Row(
+                                                mainAxisAlignment:
+                                                MainAxisAlignment.end,
+                                                children: <Widget>[
+                                                  RaisedButton(
+                                                    onPressed: () {
+                                                      Navigator.push(
                                                           context,
                                                           MaterialPageRoute(
                                                               builder: (context) =>
-                                                                  EditAbnormalityForm1(data : dataewo[index])),
-                                                        );
-
-                                                      },
-                                                      child: Text('Edit/Delete'),
+                                                                  TimelineAbnormality(
+                                                                      ewoId: dataewo[index]['id'],
+                                                                      ewoNumber: dataewo[index]['ewo_number']
+                                                                  )));
+                                                    },
+                                                    textColor: Colors.white,
+                                                    color: Colors.grey,
+                                                    padding:
+                                                    const EdgeInsets.all(
+                                                        8.0),
+                                                    child: new Text(
+                                                      "History",
                                                     ),
-                                                  ],
-                                                ),
+                                                  ),
+                                                ],
                                               ),
                                             ],
                                           ),
@@ -343,25 +283,7 @@ class _TabSubmittedState extends State<TabSubmitted> {
             ],
           ),
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => AbnormalityForm1()),
-            );
-          },
-          child: Icon(Icons.add),
-        ),
       );
-    });
-  }
-
-
-  Future<String> _setEmployee() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    var employeeId = prefs.getString("id_user");
-    setState(() {
-      _valEmployeeId = employeeId;
     });
   }
 
@@ -380,15 +302,11 @@ class _TabSubmittedState extends State<TabSubmitted> {
 
 
   static Future<void> onApproved(BuildContext context, String title,
-      String content, dynamic ewoId, String employeeId) {
+      String content, dynamic ewoId, dynamic ewoNumber) {
     return showDialog<void>(
       barrierDismissible: false,
       context: context,
       builder: (BuildContext context) {
-        final data = {
-          "id" : ewoId['id'],
-          "approve_by" : employeeId
-        };
         return AlertDialog(
           title: Text('$title'),
           content: Text(
@@ -408,13 +326,6 @@ class _TabSubmittedState extends State<TabSubmitted> {
                 style: TextStyle(color: Colors.green),
               ),
               onPressed: () {
-                Api.saveAbnormalityApproved(data).then((val){
-                  if (val['code_status'] == 1) {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => AbnormalityTab()));
-                  }else {
-                    Navigator.of(context).pop();
-                  }
-                });
 
               },
             ),

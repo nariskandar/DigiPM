@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:digi_pm_skin/api/webservice.dart';
 import 'package:digi_pm_skin/fragments/abnormality/abnormality_form2.dart';
+import 'package:digi_pm_skin/fragments/abnormality/abnormality_tab.dart';
 import 'package:digi_pm_skin/provider/digiPMProvider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,7 @@ import 'dart:async';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart' as syspaths;
+import 'package:digi_pm_skin/fragments/abnormality/abnormality_tab.dart';
 
 class AbnormalityForm1 extends StatefulWidget {
   @override
@@ -24,6 +26,7 @@ class AbnormalityForm1 extends StatefulWidget {
 }
 
 class _AbnormalityForm1State extends State<AbnormalityForm1> {
+
   String _valSbu,
       _valLine,
       _valMachine,
@@ -53,7 +56,6 @@ class _AbnormalityForm1State extends State<AbnormalityForm1> {
 
   void getSbu() async {
     var listDataSbu = await Api.getSbu();
-    print(listDataSbu);
     setState(() {
       _dataSbu = listDataSbu;
     });
@@ -66,22 +68,22 @@ class _AbnormalityForm1State extends State<AbnormalityForm1> {
     });
   }
 
-  void getMachine(String line) async {
-    var listDataMachine = await Api.getMachine(line);
+  void getMachine(String sbu, String line) async {
+    var listDataMachine = await Api.getMachine(sbu, line);
     setState(() {
       _dataMachine = listDataMachine;
     });
   }
 
-  void getUnit(String machine) async {
-    var listDataUnit = await Api.getUnit(machine);
+  void getUnit(String sbu, String line, String machine) async {
+    var listDataUnit = await Api.getUnit(sbu, line, machine);
     setState(() {
       _dataUnit = listDataUnit;
     });
   }
 
-  void getSubUnit(String unit) async {
-    var listDataSubUnit = await Api.getSubUnit(unit);
+  void getSubUnit(String sbu, String line, String machine, String unit) async {
+    var listDataSubUnit = await Api.getSubUnit(sbu, line, machine, unit);
     setState(() {
       _dataSubUnit = listDataSubUnit;
     });
@@ -109,19 +111,8 @@ class _AbnormalityForm1State extends State<AbnormalityForm1> {
     });
   }
 
-  String _date, _year, _month, _week, _dinas, _hours;
 
-  void getAllDate() async {
-    var listAllDate = await Api.getAllDate();
-    setState(() {
-      _date = listAllDate['date'];
-      _year = listAllDate['year'];
-      _month = listAllDate['month'];
-      _week = listAllDate['week'];
-      _dinas = listAllDate['dinas'];
-      _hours = listAllDate['hours'];
-    });
-  }
+
 
   // final description = TextEditingController();
   TextEditingController description;
@@ -137,7 +128,6 @@ class _AbnormalityForm1State extends State<AbnormalityForm1> {
     getSbu();
     getActivity();
     getAutoNumber();
-    getAllDate();
     _setEmployeeId();
   }
 
@@ -258,7 +248,7 @@ class _AbnormalityForm1State extends State<AbnormalityForm1> {
                                       _valUnit = null;
                                       _valSubUnit = null;
                                     });
-                                    getMachine(value);
+                                    getMachine(_valSbu, value);
                                   },
                                 ),
                               ),
@@ -294,7 +284,7 @@ class _AbnormalityForm1State extends State<AbnormalityForm1> {
                                       _valUnit = null;
                                       _valSubUnit = null;
                                     });
-                                    getUnit(value);
+                                    getUnit(_valSbu, _valLine, value);
                                   },
                                 ),
                               ),
@@ -329,7 +319,7 @@ class _AbnormalityForm1State extends State<AbnormalityForm1> {
                                       _valUnit = value;
                                       _valSubUnit = null;
                                     });
-                                    getSubUnit(value);
+                                    getSubUnit(_valSbu, _valLine, _valMachine, value);
                                   },
                                 ),
                               ),
@@ -401,8 +391,8 @@ class _AbnormalityForm1State extends State<AbnormalityForm1> {
                                             _valKerusakan = selected;
                                           }),
                                           labels: <String>[
-                                            "Electric",
-                                            "Mechanic",
+                                            "ELECTRIC",
+                                            "MECHANIC",
                                           ],
                                           picked: _valKerusakan,
                                           itemBuilder:
@@ -443,11 +433,10 @@ class _AbnormalityForm1State extends State<AbnormalityForm1> {
                                           onSelected: (String selected) =>
                                               setState(() {
                                             _valPerbaikan = selected;
-                                            print(selected);
                                           }),
                                           labels: <String>[
-                                            "Stop",
-                                            "Running",
+                                            "STOP",
+                                            "RUNNING",
                                           ],
                                           picked: _valPerbaikan,
                                           itemBuilder:
@@ -470,8 +459,7 @@ class _AbnormalityForm1State extends State<AbnormalityForm1> {
                                 height: MediaQuery.of(context).size.height / 3,
                                 child: OutlineButton(
                                   onPressed: () async {
-                                    // await getImage(context);
-                                    await _takePicture(context);
+                                    await getImage();
                                   },
                                   child: _storedImage == null
                                       ? Column(
@@ -606,11 +594,12 @@ class _AbnormalityForm1State extends State<AbnormalityForm1> {
                           )),
                         ],
                       ),
-                    )
+                    ),
                   ],
                 ),
                 RaisedButton.icon(
                   onPressed: () {
+                    // tes(context, digiPM);
                     saveAbnormalityForm1(context, digiPM);
                   },
                   shape: RoundedRectangleBorder(
@@ -636,28 +625,23 @@ class _AbnormalityForm1State extends State<AbnormalityForm1> {
     });
   }
 
-  Future _takePicture(context) async {
-    final imageFile =
-        await ImagePicker.pickImage(source: ImageSource.camera, maxWidth: 600);
 
-    if (imageFile == null) {
-      return;
-    }
 
-    setState(() {
-      _storedImage = imageFile;
-    });
+  getImage() async{
+    var image = await ImagePicker.pickImage(source: ImageSource.camera);
+      setState(() {
+        _storedImage = image;
+      });
   }
 
   Future<String> _setEmployeeId() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    var employeeId = prefs.getString("employee_id");
+    var employeeId = prefs.getString("id_user");
     var employeeName = prefs.getString("employee_name");
     setState(() {
       _valEmployeeId = employeeId;
       _valEmployeeName = employeeName;
     });
-    // return prefs.getString("employee_id");
   }
 
   void reloadUser() {
@@ -670,24 +654,30 @@ class _AbnormalityForm1State extends State<AbnormalityForm1> {
     });
   }
 
+
+
   saveAbnormalityForm1(context, DigiPMProvider digiPM) {
 
     if ( _valSbu == null) {
       Util.alert(context, 'Validation', 'Please Select SBU');
       return;
     }
+
     if ( _valLine == null) {
       Util.alert(context, 'Validation', 'Please Select Line');
       return;
     }
+
     if ( _valMachine == null) {
       Util.alert(context, 'Validation', 'Please Select Machine');
       return;
     }
+
     if ( _valUnit == null) {
       Util.alert(context, 'Validation', 'Please Select Unit');
       return;
     }
+
     if ( _valSubUnit == null) {
       Util.alert(context, 'Validation', 'Please Select SubUnit');
       return;
@@ -697,19 +687,27 @@ class _AbnormalityForm1State extends State<AbnormalityForm1> {
       Util.alert(context, 'Validation', 'Please Select Problem Type');
       return;
     }
-    if ( _valActivity == null) {
+
+    if ( _valPerbaikan == null) {
       Util.alert(context, 'Validation', 'Please Select Activity Type');
       return;
     }
+
+    if( _storedImage == null ){
+      Util.alert(context, 'Validation', 'Please Upload Photo');
+      return;
+    }
+
     if ( description.text == "") {
       Util.alert(context, 'Validation', 'Please Fill Problem Description');
       return;
     }
+
     if ( _valPmaDesc == null) {
       Util.alert(context, 'Validation', 'Please Select EWO Related to');
       return;
     }
-    Util.loader(context, "", "Saving...");
+
     final data = {
       'pm_type': 'PM03',
       'ewo_number': 'SKIN-$_valSbu-03-$_valLine-$_autoNumber',
@@ -719,23 +717,19 @@ class _AbnormalityForm1State extends State<AbnormalityForm1> {
       'equipment': _valUnit,
       'sub_unit': _valSubUnit,
       'problem_description': description.text,
-      'picture': _storedImage,
       'type_problem': _valKerusakan,
+      'type_activity' : _valPerbaikan,
       'pm_activity_type': _valPmaDesc,
       'related_to': _valPillar,
-      'date': _date,
-      'year': _year,
-      'month': _month,
-      'week': _week,
-      'shift': _dinas,
-      'hours': _hours,
       'created_by': _valEmployeeId,
-      'created_at': _date,
       'approve_by': null,
       'approve_at': null,
       'receive_by': null,
       'receive_at': null
     };
-      Navigator.push(context, MaterialPageRoute(builder: (context) => AbnormalityForm2(form : data)));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => AbnormalityForm2(form : data, picture: _storedImage)));
   }
+
+
+
 }

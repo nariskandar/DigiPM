@@ -43,6 +43,8 @@ dependencies:
   grouped_buttons: ^1.0.4
   timeline_tile: ^1.0.0
   search_page: ^1.4.0
+  incrementally_loading_listview:
+
 
 dev_dependencies:
   flutter_test:
@@ -84,7 +86,6 @@ flutter:
   - assets/icon/sparepart.png
   - assets/icon/team.png
   - assets/icon/technics.png
-
 
 
 

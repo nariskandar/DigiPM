@@ -57,7 +57,7 @@ class FormExe extends StatelessWidget {
                             color: Colors.grey,
                           );
                         }
-
+                        
                         return Container(
                             child: Image.file(
                           property[index]['img'],
@@ -444,7 +444,8 @@ class FormExe extends StatelessWidget {
       });
     } catch (e) {
       Util.alert(context, "Error",
-              "Internal error occured. Please contact developer")
+              "Internal error occured. Please contact developer"
+      )
           .then((val) async {
         clearExeprop(digiPM);
         SharedPreferences prefs = await SharedPreferences.getInstance();

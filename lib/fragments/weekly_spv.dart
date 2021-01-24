@@ -400,6 +400,7 @@ class WeeklyAssignment extends StatelessWidget {
 
     Api.setConfirmTasklist(task['id_assignment'], task['id_execution'])
         .then((val) async {
+
       SharedPreferences prefs = await SharedPreferences.getInstance();
       var data = {};
       data['id_supervisor'] = prefs.getString("id_user");

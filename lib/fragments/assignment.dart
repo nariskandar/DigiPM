@@ -61,8 +61,8 @@ class Assignment extends StatelessWidget {
                 child: Card(
                     child: InkWell(
                   onTap: () {
-                    Util.alert(context, "Warning", "For Demo only");
-                    return;
+                    // Util.alert(context, "Warning", "For Demo only");
+                    // return;
                     confirmExecution(digiPM, int, context);
                   },
                   child: Container(
@@ -238,7 +238,6 @@ class Assignment extends StatelessWidget {
   }
 
   confirmExecution(DigiPMProvider digiPM, int i, context) {
-    //clean previous exec
     clearExeprop(digiPM);
     generateReasonPendingList(digiPM);
     return showDialog(

@@ -4,12 +4,12 @@ import 'package:digi_pm_skin/api/webservice.dart';
 import 'package:digi_pm_skin/fragments/abnormality/abnormality_form2.dart';
 import 'package:digi_pm_skin/fragments/abnormality/abnormality_home.dart';
 import 'package:digi_pm_skin/fragments/abnormality/abnormality_tab.dart';
-import 'package:digi_pm_skin/fragments/test.dart';
 import 'package:digi_pm_skin/provider/digiPMProvider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:grouped_buttons/grouped_buttons.dart';
+import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:digi_pm_skin/models/sbu.dart';
 import 'package:digi_pm_skin/api/endpoint.dart';
@@ -20,24 +20,28 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart' as syspaths;
 
-class AbnormalityForm2 extends StatefulWidget {
+class ViewAbnormalityForm2 extends StatefulWidget {
   final Map<String, dynamic> form;
+  List <dynamic> answer = List();
   File picture;
 
-  AbnormalityForm2({Key key, @required this.form, this.picture}) : super(key: key);
+  ViewAbnormalityForm2({Key key, @required this.form, this.answer, this.picture}) : super(key: key);
 
   @override
-  _AbnormalityForm2State createState() => _AbnormalityForm2State(form, picture);
+  _ViewAbnormalityForm2State createState() => _ViewAbnormalityForm2State(form, answer, picture);
 }
 
-class _AbnormalityForm2State extends State<AbnormalityForm2> {
+class _ViewAbnormalityForm2State extends State<ViewAbnormalityForm2> {
 
   Map<String, dynamic> form;
+  List <dynamic> answer = List();
   File picture;
 
-  _AbnormalityForm2State(this. form, this.picture);  //constructor
+  _ViewAbnormalityForm2State(this. form, this.answer, this.picture);
 
-  final valwhat = TextEditingController();
+  List<dynamic> dataAnswer;
+
+  TextEditingController valwhat;
   final valwhen = TextEditingController();
   final valwhere = TextEditingController();
   final valwhy = TextEditingController();
@@ -46,12 +50,24 @@ class _AbnormalityForm2State extends State<AbnormalityForm2> {
 
   @override
   void initState() {
-    // TODO: implement initState
-    super.initState();
-    picture;
+    valwhat = TextEditingController();
     valwhat.addListener(() {
       setState(() {});
     });
+    // what;
+    // TODO: implement initState
+    super.initState();
+
+
+    if(widget.answer != null){
+      valwhat.text = widget.answer[0]['answer'];
+      valwho.text = widget.answer[1]['answer'];
+      valwhere.text = widget.answer[2]['answer'];
+      valwhen.text = widget.answer[3]['answer'];
+      valwhy.text = widget.answer[4]['answer'];
+      valhow.text = widget.answer[5]['answer'];
+    }
+
   }
 
   @override
@@ -64,9 +80,6 @@ class _AbnormalityForm2State extends State<AbnormalityForm2> {
   Widget build(BuildContext context) {
     return Consumer<DigiPMProvider>(builder: (context, digiPM, __) {
       return Scaffold(
-        appBar: AppBar(
-          title: Text('EWO Abnormality Form'),
-        ),
         body: Container(
           child: Card(
             margin: EdgeInsets.all(7),
@@ -97,6 +110,7 @@ class _AbnormalityForm2State extends State<AbnormalityForm2> {
                                       child: Padding(
                                         padding: EdgeInsets.all(5.0),
                                         child: TextField(
+                                          readOnly: true,
                                           maxLines: 2,
                                           controller: valwhat,
                                           decoration: InputDecoration(
@@ -126,6 +140,7 @@ class _AbnormalityForm2State extends State<AbnormalityForm2> {
                                       child: Padding(
                                         padding: EdgeInsets.all(5.0),
                                         child: TextField(
+                                          readOnly: true,
                                           controller: valwho,
                                           maxLines: 2,
                                           decoration: InputDecoration(
@@ -155,6 +170,7 @@ class _AbnormalityForm2State extends State<AbnormalityForm2> {
                                       child: Padding(
                                         padding: EdgeInsets.all(5.0),
                                         child: TextField(
+                                          readOnly: true,
                                           controller: valwhere,
                                           maxLines: 2,
                                           decoration: InputDecoration(
@@ -184,6 +200,7 @@ class _AbnormalityForm2State extends State<AbnormalityForm2> {
                                       child: Padding(
                                         padding: EdgeInsets.all(5.0),
                                         child: TextField(
+                                          readOnly: true,
                                           controller: valwhen,
                                           maxLines: 2,
                                           decoration: InputDecoration(
@@ -213,6 +230,7 @@ class _AbnormalityForm2State extends State<AbnormalityForm2> {
                                       child: Padding(
                                         padding: EdgeInsets.all(5.0),
                                         child: TextField(
+                                          readOnly: true,
                                           controller: valwhy,
                                           maxLines: 2,
                                           decoration: InputDecoration(
@@ -242,6 +260,7 @@ class _AbnormalityForm2State extends State<AbnormalityForm2> {
                                       child: Padding(
                                         padding: EdgeInsets.all(5.0),
                                         child: TextField(
+                                          readOnly: true,
                                           controller: valhow,
                                           maxLines: 2,
                                           decoration: InputDecoration(
@@ -276,22 +295,9 @@ class _AbnormalityForm2State extends State<AbnormalityForm2> {
                       icon: Icon(Icons.cancel, color:Colors.white,),
                       textColor: Colors.white,
                       splashColor: Color.fromRGBO(18, 37, 63, 1.0),
-                      color: Colors.red,),
-                    RaisedButton.icon(
-                      onPressed: (){
-                        saveAbnormalityForm2(context, digiPM);
-                        },
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                      label: Text('Save',
-                        style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700),),
-                      icon: Icon(Icons.save, color:Colors.white,),
-                      textColor: Colors.white,
-                      splashColor: Color.fromRGBO(18, 37, 63, 1.0),
-                      color: Colors.green,),
+                      color: Colors.black26,),
                   ],
                 )
-
               ],
             ),
           ),
@@ -331,7 +337,6 @@ class _AbnormalityForm2State extends State<AbnormalityForm2> {
       Util.alert(context, 'Validation', 'Please Fill Column of How');
       return;
     }
-    Util.loader(context, 'Saving', 'Please wait ..');
 
     final data = {
       'id' : form['id'],
@@ -343,11 +348,19 @@ class _AbnormalityForm2State extends State<AbnormalityForm2> {
       "equipment": form['equipment'],
       "sub_unit": form['sub_unit'],
       "problem_description": form['problem_description'],
+      "picture": null,
       "type_problem": form['type_problem'],
       "type_activity" : form['type_activity'],
       "pm_activity_type": form['pm_activity_type'],
       "related_to": form['related_to'],
+      "date": form['date'],
+      "year": form['year'],
+      "month": form['month'],
+      "week": form['week'],
+      "shift": form['shift'],
+      "hours": form['hours'],
       "created_by": form['created_by'],
+      "created_at": form['created_at'],
       "approve_by": form['who'],
       "approve_at": form['where'],
       "receive_by": form['receive_by'],
@@ -363,13 +376,14 @@ class _AbnormalityForm2State extends State<AbnormalityForm2> {
     };
 
 
-
-    Api.saveAbnormalityForm1(data, picture).then((value)  {
+    Api.saveAbnormalityForm1(data, picture).then((value) async  {
       var res = json.decode(value);
       setState(() {
+
         if(res['code_status'] == 1)  {
-          alert(context, "Success", "You have submit EWO Abnormality : \n" + form['ewo_number']);
+          alert(context, "Success", "You have update the execution");
         }
+
       });
     });
 
@@ -396,5 +410,39 @@ class _AbnormalityForm2State extends State<AbnormalityForm2> {
       },
     );
   }
+
+  static Future<void> alertDialog(
+      BuildContext context, String title, String content, String ewoId) {
+    return showDialog<void>(
+      barrierDismissible: false,
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('$title'),
+          content: Text('$content'),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('Cancel'),
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => AbnormalityTab() ));
+              },
+            ),
+            FlatButton(
+              child: Text('Ok'),
+              onPressed: () {
+                Api.deleteAbnormality(ewoId).then((value) {
+                  if(value['code_status'] == 1){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => AbnormalityTab()));
+                  }
+                });
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+
 
 }

@@ -2,7 +2,7 @@ import 'package:digi_pm_skin/api/webservice.dart';
 import 'package:digi_pm_skin/components/drawer.dart';
 import 'package:digi_pm_skin/components/statefulWapper.dart';
 import 'package:digi_pm_skin/fragments/assignment.dart';
-import 'package:digi_pm_skin/fragments/abnormality/abnormality_page.dart';
+import 'package:digi_pm_skin/fragments/abnormality/abnormality_home.dart';
 // import 'package:digi_pm_skin/fragments/autonomous.dart';
 // import 'package:digi_pm_skin/fragments/breakdown.dart';
 // import 'package:digi_pm_skin/fragments/manyTask.dart';
@@ -272,7 +272,7 @@ class Home extends StatelessWidget {
         case 4:
           return new UserManagement();
         case 5:
-          return new AbnormalityPage();
+          return new AbnormalityHome();
         // case 6:
         //   return new BreakdownPage();
         // case 7:
@@ -301,7 +301,7 @@ class Home extends StatelessWidget {
 
       if (index == 4) digiPM.setTaskbar = "DIGI PM - User Management";
 
-      if (index == 5) digiPM.setTaskbar = "DIGI PM - Abnormality EWO(PM03)";
+      // if (index == 5) digiPM.setTaskbar = "DIGI PM - Abnormality EWO(PM03)";
 
       if (index == 6) digiPM.setTaskbar = "DIGI PM - Breakdown EWO(PM02)";
       if (index == 7) digiPM.setTaskbar = "DIGI PM - Autonomous Maintenance";

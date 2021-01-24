@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:grouped_buttons/grouped_buttons.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
-import 'package:digi_pm_skin/models/sbu.dart';
+import 'package:digi_pm_skin/fragments/abnormality/edit_abnormality_form2.dart';
 import 'package:digi_pm_skin/api/endpoint.dart';
 import 'package:http/http.dart' as http;
 import 'package:digi_pm_skin/util/util.dart';
@@ -18,104 +18,75 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart' as syspaths;
 
-// class AbnormalityForm2 extends StatefulWidget {
-//   final Map<String, dynamic> form;
-//
-//   AbnormalityForm2({Key key, @required this.form}) : super(key: key);
-//
-//   @override
-//   _AbnormalityForm2State createState() => _AbnormalityForm2State(form);
-// }
-
-// class _AbnormalityForm2State extends State<AbnormalityForm2> {
-
-  // Map<String, dynamic> form;
-  // _AbnormalityForm2State(this. form);  //constructor
 
 class EditAbnormalityForm1 extends StatefulWidget {
-  String ewoId;
+  Map<String, dynamic> data;
 
-  EditAbnormalityForm1({Key key, @required this.ewoId}) : super(key: key);
+  EditAbnormalityForm1({Key key, @required this.data}) : super(key: key);
 
   @override
-  _EditAbnormalityForm1State createState() => _EditAbnormalityForm1State(ewoId);
+  _EditAbnormalityForm1State createState() => _EditAbnormalityForm1State(data);
 }
 
 class _EditAbnormalityForm1State extends State<EditAbnormalityForm1> {
-  String ewoId;
-  _EditAbnormalityForm1State(this.ewoId);
+  Map<String, dynamic> data;
 
-  String _valSbu,
-      _valLine,
-      _valMachine,
-      _valUnit,
-      _valSubUnit,
-      _valPerbaikan,
-      _valKerusakan,
-      _valActivity,
-      _valPillar,
-      _autoNumber,
-      _valEmployeeId,
-      _valEmployeeName,
-      _valPmaDesc,
-      _valAllDate;
+  _EditAbnormalityForm1State(this.data);
 
-  List<dynamic> dataEwo = List();
-  List<dynamic> _dataSbu = List(),
-      _dataLine = List(),
-      _dataMachine = List(),
-      _dataUnit = List(),
-      _dataSubUnit = List(),
-      _dataActivity = List(),
-      _dataPillar = List(),
-      _dataAllDate = List();
+  String _valSbu, _valLine, _valMachine, _valUnit, _valSubUnit, _valKerusakan, _valPerbaikan, _valActivity, _valPillar, _autoNumber, _valEmployeeId, _valEmployeeName, _valPmaDesc, _valAllDate;
+  // String _valKerusakan = "";
+  String _date, _year, _month, _week, _dinas, _hours;
 
   File _storedImage;
 
+
+  List<dynamic>
+  _dataSbu = List(), _dataLine = List(), _dataMachine = List(), _dataUnit = List(), _dataSubUnit = List(), _dataActivity = List(), _dataPillar = List(), _dataAllDate = List();
+  List <dynamic> dataAnswer = List();
+
   var user_login;
 
-  String dataEwoSbu;
-
-  void getDataEwo(dynamic ewoId) async {
-    var listDataEwo = await Api.getEwoList(ewoId);
-    setState(() {
-      dataEwo = listDataEwo;
-    });
-  }
 
   void getSbu() async {
     var listDataSbu = await Api.getSbu();
-    print(listDataSbu);
     setState(() {
       _dataSbu = listDataSbu;
     });
   }
 
   void getLine(String sbu) async {
-    var listDataLine = await Api.getLine(sbu);
+    var listDataLine = await Api.getLine(sbu.toUpperCase());
     setState(() {
       _dataLine = listDataLine;
     });
   }
 
-  void getMachine(String line) async {
-    var listDataMachine = await Api.getMachine(line);
+  void getMachine(String sbu, String line) async {
+    var listDataMachine = await Api.getMachine(sbu, line);
     setState(() {
       _dataMachine = listDataMachine;
     });
   }
 
-  void getUnit(String machine) async {
-    var listDataUnit = await Api.getUnit(machine);
+  void getUnit(String sbu, String line, String machine) async {
+    var listDataUnit = await Api.getUnit(sbu, line, machine);
     setState(() {
       _dataUnit = listDataUnit;
     });
   }
 
-  void getSubUnit(String unit) async {
-    var listDataSubUnit = await Api.getSubUnit(unit);
+  void getSubUnit(String sbu, String line, String machine, String unit) async {
+    var listDataSubUnit = await Api.getSubUnit(sbu, line, machine, unit);
     setState(() {
       _dataSubUnit = listDataSubUnit;
+    });
+  }
+
+
+  void getIdActivity(String pmat_description) async {
+    var listDataActivity = await Api.getActivity(pmat_description);
+    setState(() {
+      _valActivity = listDataActivity[0]['id'];
     });
   }
 
@@ -128,6 +99,7 @@ class _EditAbnormalityForm1State extends State<EditAbnormalityForm1> {
 
   void getAutoNumber() async {
     var autoNumber = await Api.getAutoNumber();
+    // print(autoNumber);
     setState(() {
       _autoNumber = autoNumber;
     });
@@ -141,7 +113,7 @@ class _EditAbnormalityForm1State extends State<EditAbnormalityForm1> {
     });
   }
 
-  String _date, _year, _month, _week, _dinas, _hours;
+  String numbLast;
 
   void getAllDate() async {
     var listAllDate = await Api.getAllDate();
@@ -154,9 +126,14 @@ class _EditAbnormalityForm1State extends State<EditAbnormalityForm1> {
       _hours = listAllDate['hours'];
     });
   }
-
-  // final description = TextEditingController();
   TextEditingController description;
+
+  void getEarlyQuestion(String ewoId) async{
+    var dataEarlyQuestion = await Api.getEarlyQuestion(ewoId);
+    setState(() {
+      dataAnswer = dataEarlyQuestion;
+    });
+  }
 
   @override
   void initState() {
@@ -167,12 +144,37 @@ class _EditAbnormalityForm1State extends State<EditAbnormalityForm1> {
 
     // TODO: implement initState
     super.initState();
-    getDataEwo(ewoId);
+
+    if (widget.data != null){
+      String numbLastEwo = widget.data['ewo_number'];
+      numbLast = numbLastEwo.substring(numbLastEwo.length - 7);
+      _valActivity;
+      _valSbu = widget.data['sbu'].toString().toUpperCase();
+      _valLine = widget.data['line'].toString();
+      _valMachine = widget.data['machine'].toString();
+      _valUnit = widget.data['equipment'].toString();
+      _valSubUnit = widget.data['sub_unit'].toString();
+      _valKerusakan = widget.data['type_problem'].toString();
+      _valPerbaikan = widget.data['type_activity'].toString();
+      description.text = widget.data['problem_description'];
+      _valPillar = widget.data['related_to'];
+    }
+
+    //function
     getSbu();
+    getLine(_valSbu);
+    getMachine(_valSbu, _valLine);
+    getUnit(_valSbu, _valLine, _valMachine);
+    getSubUnit(_valSbu, _valLine, _valMachine, _valUnit);
     getActivity();
+    getIdActivity(widget.data['pm_activity_type']);
+    getPillar(_valActivity);
+    getEarlyQuestion(widget.data['id']);
+
     getAutoNumber();
     getAllDate();
     _setEmployeeId();
+
   }
 
   @override
@@ -186,7 +188,7 @@ class _EditAbnormalityForm1State extends State<EditAbnormalityForm1> {
     return Consumer<DigiPMProvider>(builder: (context, digiPM, __) {
       return Scaffold(
         appBar: AppBar(
-          title: Text('Edit EWO Abnormality Form'),
+          title: Text('Edit Abnormality Form'),
         ),
         body: Container(
           child: Card(
@@ -204,12 +206,6 @@ class _EditAbnormalityForm1State extends State<EditAbnormalityForm1> {
                         mainAxisSize: MainAxisSize.max,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          RaisedButton(
-                            child: Text('print'),
-                            onPressed: (){
-                              getDataEwo(ewoId);
-                            },
-                          ),
                           Container(
                             child: TextFormField(
                               readOnly: true,
@@ -218,7 +214,7 @@ class _EditAbnormalityForm1State extends State<EditAbnormalityForm1> {
                                       ? 'SKIN-'.toUpperCase()
                                       : _valLine == null
                                       ? 'SKIN-$_valSbu-03'.toUpperCase()
-                                      : 'SKIN-$_valSbu-03-$_valLine-$_autoNumber'
+                                      : 'SKIN-$_valSbu-03-$_valLine-$numbLast'
                                       .toUpperCase(),
                                   labelStyle: TextStyle(
                                       color: Colors.black,
@@ -261,7 +257,9 @@ class _EditAbnormalityForm1State extends State<EditAbnormalityForm1> {
                                           _valUnit = null;
                                           _valSubUnit = null;
                                         });
-                                        getLine(value);
+                                        setState(() {
+                                          getLine(value);
+                                        });
                                       },
                                     ),
                                   ),
@@ -298,7 +296,7 @@ class _EditAbnormalityForm1State extends State<EditAbnormalityForm1> {
                                           _valUnit = null;
                                           _valSubUnit = null;
                                         });
-                                        getMachine(value);
+                                        getMachine(_valSbu, value);
                                       },
                                     ),
                                   ),
@@ -334,7 +332,7 @@ class _EditAbnormalityForm1State extends State<EditAbnormalityForm1> {
                                           _valUnit = null;
                                           _valSubUnit = null;
                                         });
-                                        getUnit(value);
+                                        getUnit(_valSbu, _valLine, value);
                                       },
                                     ),
                                   ),
@@ -369,7 +367,7 @@ class _EditAbnormalityForm1State extends State<EditAbnormalityForm1> {
                                           _valUnit = value;
                                           _valSubUnit = null;
                                         });
-                                        getSubUnit(value);
+                                        getSubUnit(_valSbu, _valLine, _valMachine, value);
                                       },
                                     ),
                                   ),
@@ -441,8 +439,8 @@ class _EditAbnormalityForm1State extends State<EditAbnormalityForm1> {
                                                 _valKerusakan = selected;
                                               }),
                                           labels: <String>[
-                                            "Electric",
-                                            "Mechanic",
+                                            "ELECTRIC",
+                                            "MECHANIC",
                                           ],
                                           picked: _valKerusakan,
                                           itemBuilder:
@@ -483,11 +481,10 @@ class _EditAbnormalityForm1State extends State<EditAbnormalityForm1> {
                                           onSelected: (String selected) =>
                                               setState(() {
                                                 _valPerbaikan = selected;
-                                                print(selected);
                                               }),
                                           labels: <String>[
-                                            "Stop",
-                                            "Running",
+                                            "STOP",
+                                            "RUNNING",
                                           ],
                                           picked: _valPerbaikan,
                                           itemBuilder:
@@ -510,22 +507,17 @@ class _EditAbnormalityForm1State extends State<EditAbnormalityForm1> {
                                 height: MediaQuery.of(context).size.height / 3,
                                 child: OutlineButton(
                                   onPressed: () async {
-                                    // await getImage(context);
-                                    await _takePicture(context);
+                                    await getImage();
                                   },
-                                  child: _storedImage == null
-                                      ? Column(
-                                    children: [
-                                      Icon(
-                                        Icons.photo,
-                                        size: 50,
-                                      ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Text('Upload Photo'),
-                                    ],
-                                  )
+                                  child:
+                                  _storedImage == null
+                                      ? Container(
+                                      width: MediaQuery.of(context).size.width/4,
+                                      height: MediaQuery.of(context).size.height/4,
+                                      decoration: new BoxDecoration(
+                                          image: new DecorationImage(
+                                              fit: BoxFit.cover,
+                                              image: NetworkImage(Api.BASE_URL_PM03 + data['picture']))))
                                       : Image.file(
                                     _storedImage,
                                     fit: BoxFit.cover,
@@ -633,7 +625,7 @@ class _EditAbnormalityForm1State extends State<EditAbnormalityForm1> {
                                       decoration: InputDecoration(
                                           hintText: _valPillar == null
                                               ? ' - '
-                                              : '$_valPillar',
+                                              : ' $_valPillar',
                                           hintStyle: TextStyle(
                                               color: Colors.black,
                                               fontSize: 14,
@@ -651,6 +643,7 @@ class _EditAbnormalityForm1State extends State<EditAbnormalityForm1> {
                 ),
                 RaisedButton.icon(
                   onPressed: () {
+                    // tes(context, digiPM);
                     saveAbnormalityForm1(context, digiPM);
                   },
                   shape: RoundedRectangleBorder(
@@ -676,28 +669,23 @@ class _EditAbnormalityForm1State extends State<EditAbnormalityForm1> {
     });
   }
 
-  Future _takePicture(context) async {
-    final imageFile =
-    await ImagePicker.pickImage(source: ImageSource.camera, maxWidth: 600);
-
-    if (imageFile == null) {
-      return;
-    }
+  getImage() async {
+    var image = await ImagePicker.pickImage(source: ImageSource.camera);
 
     setState(() {
-      _storedImage = imageFile;
+        _storedImage = image;
     });
+
   }
 
   Future<String> _setEmployeeId() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    var employeeId = prefs.getString("employee_id");
+    var employeeId = prefs.getString("id_user");
     var employeeName = prefs.getString("employee_name");
     setState(() {
       _valEmployeeId = employeeId;
       _valEmployeeName = employeeName;
     });
-    // return prefs.getString("employee_id");
   }
 
   void reloadUser() {
@@ -745,14 +733,13 @@ class _EditAbnormalityForm1State extends State<EditAbnormalityForm1> {
       Util.alert(context, 'Validation', 'Please Fill Problem Description');
       return;
     }
-    if ( _valPmaDesc == null) {
-      Util.alert(context, 'Validation', 'Please Select EWO Related to');
-      return;
-    }
-    Util.loader(context, "", "Saving...");
+
+
+    // Util.loader(context, "", "Saving...");
     final data = {
+      'id' : widget.data['id'],
       'pm_type': 'PM03',
-      'ewo_number': 'SKIN-$_valSbu-03-$_valLine-$_autoNumber',
+      'ewo_number': 'SKIN-$_valSbu-03-$_valLine-$numbLast',
       'sbu': _valSbu,
       'line': _valLine,
       'machine': _valMachine,
@@ -761,6 +748,7 @@ class _EditAbnormalityForm1State extends State<EditAbnormalityForm1> {
       'problem_description': description.text,
       'picture': _storedImage,
       'type_problem': _valKerusakan,
+      'type_activity' : _valPerbaikan,
       'pm_activity_type': _valPmaDesc,
       'related_to': _valPillar,
       'date': _date,
@@ -776,6 +764,9 @@ class _EditAbnormalityForm1State extends State<EditAbnormalityForm1> {
       'receive_by': null,
       'receive_at': null
     };
-    Navigator.push(context, MaterialPageRoute(builder: (context) => AbnormalityForm2(form : data)));
+
+    // var img = _storedImage == null ? File(Api.BASE_URL_PM03 + widget.data['picture']) : _storedImage;
+
+    Navigator.push(context, MaterialPageRoute(builder: (context) => EditAbnormalityForm2(form : data, answer : dataAnswer, picture : _storedImage)));
   }
 }
