@@ -44,6 +44,20 @@ dependencies:
   timeline_tile: ^1.0.0
   search_page: ^1.4.0
   incrementally_loading_listview:
+  qr_flutter: ^3.2.0
+  dropdown_search: ^0.3.9
+  searchable_dropdown: ^1.1.0
+  superellipse_shape: ^0.1.6
+  flutter_switch: ^0.2.1
+
+
+
+
+
+
+
+
+
 
 
 dev_dependencies:
@@ -86,7 +100,8 @@ flutter:
   - assets/icon/sparepart.png
   - assets/icon/team.png
   - assets/icon/technics.png
-
+  - assets/icon/user.png
+  - assets/icon/approval.png
 
 
 

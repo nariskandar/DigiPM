@@ -66,8 +66,8 @@ class WeeklyAssignment extends StatelessWidget {
                   child: Card(
                       child: InkWell(
                     onTap: () {
-                      Util.alert(context, "Warning", "For Demo only");
-                      return;
+                      // Util.alert(context, "Warning", "For Demo only");
+                      // return;
                       confirmExecution(digiPM, int,
                           digiPM.tasklistUserSpvWeekly[int], context);
                     },

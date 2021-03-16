@@ -18,14 +18,15 @@ INJECTED from D:\Project\digi_pm_skin\android\app\src\main\AndroidManifest.xml:1
 INJECTED from D:\Project\digi_pm_skin\android\app\src\main\AndroidManifest.xml:1:1-35:12
 MERGED from D:\Project\digi_pm_skin\android\app\src\main\AndroidManifest.xml:1:1-35:12
 MERGED from [:video_player] D:\Project\digi_pm_skin\build\video_player\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
-MERGED from [:package_info] D:\Project\digi_pm_skin\build\package_info\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [:sqflite] D:\Project\digi_pm_skin\build\sqflite\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:package_info] D:\Project\digi_pm_skin\build\package_info\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [:wakelock] D:\Project\digi_pm_skin\build\wakelock\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [:image_picker] D:\Project\digi_pm_skin\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-22:12
 MERGED from [:flutter_plugin_android_lifecycle] D:\Project\digi_pm_skin\build\flutter_plugin_android_lifecycle\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [:flutter_keyboard_visibility] D:\Project\digi_pm_skin\build\flutter_keyboard_visibility\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [:flutter_plugin_pdf_viewer] D:\Project\digi_pm_skin\build\flutter_plugin_pdf_viewer\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [:path_provider] D:\Project\digi_pm_skin\build\path_provider\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:searchable_dropdown] D:\Project\digi_pm_skin\build\searchable_dropdown\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [:phone_number] D:\Project\digi_pm_skin\build\phone_number\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [:shared_preferences] D:\Project\digi_pm_skin\build\shared_preferences\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.multidex:multidex:2.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\multidex-2.0.0.aar\1e4c4023513eb23597186b93c3198e6a\AndroidManifest.xml:17:1-22:12
@@ -95,10 +96,10 @@ INJECTED from D:\Project\digi_pm_skin\android\app\src\main\AndroidManifest.xml
 INJECTED from D:\Project\digi_pm_skin\android\app\src\main\AndroidManifest.xml
 MERGED from [:video_player] D:\Project\digi_pm_skin\build\video_player\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:video_player] D:\Project\digi_pm_skin\build\video_player\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
-MERGED from [:package_info] D:\Project\digi_pm_skin\build\package_info\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
-MERGED from [:package_info] D:\Project\digi_pm_skin\build\package_info\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:sqflite] D:\Project\digi_pm_skin\build\sqflite\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:sqflite] D:\Project\digi_pm_skin\build\sqflite\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:package_info] D:\Project\digi_pm_skin\build\package_info\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:package_info] D:\Project\digi_pm_skin\build\package_info\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:wakelock] D:\Project\digi_pm_skin\build\wakelock\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:wakelock] D:\Project\digi_pm_skin\build\wakelock\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:image_picker] D:\Project\digi_pm_skin\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
@@ -111,6 +112,8 @@ MERGED from [:flutter_plugin_pdf_viewer] D:\Project\digi_pm_skin\build\flutter_p
 MERGED from [:flutter_plugin_pdf_viewer] D:\Project\digi_pm_skin\build\flutter_plugin_pdf_viewer\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:path_provider] D:\Project\digi_pm_skin\build\path_provider\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:path_provider] D:\Project\digi_pm_skin\build\path_provider\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:searchable_dropdown] D:\Project\digi_pm_skin\build\searchable_dropdown\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:searchable_dropdown] D:\Project\digi_pm_skin\build\searchable_dropdown\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:phone_number] D:\Project\digi_pm_skin\build\phone_number\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:phone_number] D:\Project\digi_pm_skin\build\phone_number\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:shared_preferences] D:\Project\digi_pm_skin\build\shared_preferences\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44

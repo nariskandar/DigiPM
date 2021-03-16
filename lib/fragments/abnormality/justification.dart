@@ -1,23 +1,11 @@
 import 'package:digi_pm_skin/api/webservice.dart';
-import 'package:digi_pm_skin/fragments/abnormality/analysis_form1.dart';
-import 'package:digi_pm_skin/fragments/abnormality/edit_abnormality_form1.dart';
-import 'package:digi_pm_skin/fragments/abnormality/abnormality_tab.dart';
-import 'package:digi_pm_skin/fragments/abnormality/form_non_she.dart';
-import 'package:digi_pm_skin/fragments/abnormality/form_she.dart';
 import 'package:digi_pm_skin/fragments/abnormality/justification_form1.dart';
+import 'package:digi_pm_skin/fragments/timeline.dart';
 import 'package:digi_pm_skin/provider/digiPMProvider.dart';
-import 'package:digi_pm_skin/util/util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:incrementally_loading_listview/incrementally_loading_listview.dart';
 import 'dart:async';
-
-import 'package:digi_pm_skin/fragments/abnormality/abnormality_home.dart';
-
-import 'package:digi_pm_skin/fragments/abnormality/abnormality_form1.dart';
-import 'package:digi_pm_skin/fragments/abnormality/timeline_abnormality.dart';
 
 class Justification extends StatefulWidget {
   @override
@@ -41,14 +29,15 @@ class _JustificationState extends State<Justification> {
   List<Map<String, dynamic>> dataewo = [];
 
   void getEwo() async {
-    var listDataLine = await Api.getEwoList();
+    var listDataLine = await Api.getDataEwoList('PM03');
     setState(() {
+
       _dataEwo = listDataLine;
       _dataEwo.forEach((element) {
 
-        if (element['severity_id'] == null) {
+        if (element['ANALYSIS'] == null) {
           return;
-        } else {
+        } else if(element['JUSTIFICATION'] == null){
           setState(() {
             dataewo.add(element);
           });
@@ -58,47 +47,19 @@ class _JustificationState extends State<Justification> {
     });
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return Consumer<DigiPMProvider>(builder: (context, digiPM, __) {
       return Scaffold(
         appBar: AppBar(
-          title: Text('Analysis'),
+          title: Text('Justification Rootcause'),
         ),
         body: Container(
+          color: Colors.blueGrey,
           child: Column(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              Expanded(
-                flex: 2,
-                child: Container(
-                  color: Colors.white,
-                  child: new Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: new Card(
-                      child: new ListTile(
-                        leading: new Icon(Icons.search),
-                        title: new TextField(
-                          controller: search,
-                          decoration: new InputDecoration(
-                              hintText: 'Search',
-                              focusColor: Theme.of(context).primaryColor,
-                              border: InputBorder.none),
-                        ),
-                        trailing: new IconButton(
-                          icon: new Icon(Icons.calendar_today),
-                          onPressed: () {
-                            search.clear();
-                          },
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
               Expanded(
                 flex: 12,
                 child: ListView.builder(
@@ -223,6 +184,18 @@ class _JustificationState extends State<Justification> {
                                                 children: <Widget>[
                                                   RaisedButton(
                                                     onPressed: () {
+                                                      Navigator.push(context, MaterialPageRoute(builder: (context) => Timeline(
+                                                          ewoId: dataewo[index]['id'],
+                                                          pm_type: 'PM03',
+                                                      )));
+                                                    },
+                                                    child: Text('History'),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 10,
+                                                  ),
+                                                  RaisedButton(
+                                                    onPressed: () {
                                                       Navigator.push(context, MaterialPageRoute(builder: (context) => JustificationForm1(data: dataewo[index])));
                                                     },
                                                     color: Colors.orange,
@@ -305,4 +278,5 @@ class _JustificationState extends State<Justification> {
       },
     );
   }
+
 }

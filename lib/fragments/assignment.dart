@@ -1,5 +1,6 @@
 import 'package:digi_pm_skin/api/webservice.dart';
 import 'package:digi_pm_skin/pages/Execution.dart';
+import 'package:digi_pm_skin/provider/abnormalityProvider.dart';
 import 'package:digi_pm_skin/provider/digiPMProvider.dart';
 import 'package:digi_pm_skin/util/util.dart';
 import 'package:flutter/material.dart';
@@ -7,13 +8,13 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'dart:developer' as dev;
-
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Assignment extends StatelessWidget {
+  
   @override
   Widget build(BuildContext context) {
-    return Consumer<DigiPMProvider>(builder: (context, digiPM, __) {
+    return Consumer2<DigiPMProvider, AbnormalityProvider>(builder: (context, digiPM, abnormality,__) {
       dev.log("assignment rendered");
       var width = MediaQuery.of(context).size.width;
 
@@ -270,9 +271,8 @@ class Assignment extends StatelessWidget {
           builder: (context) => new AlertDialog(
             title: new Text('Pending Reason Confirmation'),
             content: Container(
-              height: 100,
+              height: 180,
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   new Text('Please provide the reason for pending'),
                   cekReason(digiPM, i, context),

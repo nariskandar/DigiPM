@@ -12,7 +12,7 @@ class Endpoint {
   static const BASE_URL_CLOUD_ZARA = "http://159.65.143.55/zara";
   static const BASE_URL_CLOUD_RAW_ZARA = "http://159.65.143.55/zazra";
   static const BASE_URL_CLOUD_DEMO = "http://159.65.143.55/demo";
-  static const BASE_URL_LOCAL = "http://192.168.43.61/ml-skin-web";
+  static const BASE_URL_LOCAL = "http://10.10.10.23/ml-skin-web";
   static const BASE_URL_CLOUD_RAW_DEMO = "http://159.65.143.55/demo";
   static const BASE_URL_MULTI_PORT = 80;
   static const BASE_URL_NOX = "http://172.17.100.2:2030/";

@@ -24,7 +24,6 @@ class ExecutionAction extends StatelessWidget {
                 if (digiPM.executionProperty['hasExecuted']) {
                   return;
                 }
-
                 if (!digiPM.executionProperty['isStarting']) {
                   showDialog<void>(
                     context: context,
@@ -70,12 +69,14 @@ class ExecutionAction extends StatelessWidget {
                               });
                             },
                           ),
+
                           FlatButton(
                             child: Text('NO'),
                             onPressed: () {
                               Navigator.pop(context);
                             },
                           ),
+
                         ],
                       );
                     },
@@ -167,4 +168,5 @@ class ExecutionAction extends StatelessWidget {
       return Theme.of(context).accentColor;
     }
   }
+
 }

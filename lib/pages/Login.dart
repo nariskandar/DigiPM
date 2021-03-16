@@ -76,6 +76,7 @@ class _MyLoginState extends State<Login> {
                                     ),
                                     Container(
                                       child: TextFormField(
+                                        keyboardType: TextInputType.number,
                                         decoration: InputDecoration(
                                             labelText: "ID PENGGUNA",
                                             hintStyle:
@@ -101,6 +102,7 @@ class _MyLoginState extends State<Login> {
                                     ),
                                     Container(
                                       child: TextFormField(
+                                        keyboardType: TextInputType.number,
                                         decoration: InputDecoration(
                                             labelText: "PIN",
                                             hintStyle:
@@ -221,6 +223,7 @@ class _MyLoginState extends State<Login> {
             } else {
               val.setBool("is_supervisor", false);
             }
+
             val.setBool("login", true);
             val.setString("id_user", response['id']);
             val.setString("role", response['role']);
@@ -231,10 +234,10 @@ class _MyLoginState extends State<Login> {
             val.setString("email", response['email']);
             val.setString("gender", response['gender']);
             val.setString("department", response['department']);
-            val.setString("gender", response['gender']);
             val.setString("pic_path",
                 Api.BASE_URL_PIC_PROFILE + '/' + response['pic_path']);
             val.setString("pic_path_raw", response['pic_path']);
+
           });
           Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(builder: (context) => new Home()),

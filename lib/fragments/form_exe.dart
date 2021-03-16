@@ -57,12 +57,13 @@ class FormExe extends StatelessWidget {
                             color: Colors.grey,
                           );
                         }
-                        
+
                         return Container(
                             child: Image.file(
                           property[index]['img'],
                           fit: BoxFit.cover,
                         ));
+
                       }),
                     )),
                     FlatButton.icon(
@@ -80,6 +81,7 @@ class FormExe extends StatelessWidget {
                       crossAxisCount: digiPM.executionProperty['max_photo'],
                       children: List.generate(
                           digiPM.executionProperty['max_photo'], (index) {
+
                         List<dynamic> property =
                             digiPM.executionProperty['photo_evidence_after'];
 
@@ -98,16 +100,17 @@ class FormExe extends StatelessWidget {
                           property[index]['img'],
                           fit: BoxFit.cover,
                         ));
+
                       }),
                     )),
                     FlatButton.icon(
                       color: Theme.of(context).accentColor,
                       textColor: Colors.white,
-                      icon: Icon(Icons.add_a_photo),
-                      label: setLabelFotoAfter(digiPM.selectedTasklist),
                       onPressed: () async {
                         await getImageAfter(context, digiPM);
                       },
+                      icon: Icon(Icons.add_a_photo),
+                      label: setLabelFotoAfter(digiPM.selectedTasklist),
                     )
                   ],
                 ),
@@ -356,7 +359,7 @@ class FormExe extends StatelessWidget {
       'before': digiPM.executionProperty['photo_evidence_before'],
       'after': digiPM.executionProperty['photo_evidence_after'],
       'payload': {
-        'status_exe': digiPM.executionProperty['execution_status'],
+        'status_exe':   digiPM.executionProperty['execution_status'],
         'second_exe': digiPM.executionProperty['secondExeCount'],
         'recommendation_text': digiPM.executionProperty['recommendation_text'],
         'other_reason_text': digiPM.executionProperty['other_reason_text'],
@@ -364,6 +367,8 @@ class FormExe extends StatelessWidget {
         'tasklist': digiPM.selectedTasklist
       }
     };
+
+    print(data);
 
     try {
       digiPM.saveExecution(data).then((val) async {
@@ -417,6 +422,7 @@ class FormExe extends StatelessWidget {
               data['man_power'] = "1";
               data['status'] = "1";
             }
+
             data['id_supervisor'] = prefs.getString("id_user");
             await digiPM.getDailySupervisor(data);
             await digiPM.getWeeklySupervisor(data);
@@ -443,22 +449,22 @@ class FormExe extends StatelessWidget {
         }
       });
     } catch (e) {
-      Util.alert(context, "Error",
-              "Internal error occured. Please contact developer"
-      )
-          .then((val) async {
-        clearExeprop(digiPM);
-        SharedPreferences prefs = await SharedPreferences.getInstance();
-
-        digiPM.getUserTasklist({
-          'id_user': prefs.getString("id_user"),
-          'date': DateFormat("yyyy-MM-dd").format(digiPM.selectedDate)
-        }, context);
-
-        Navigator.of(context).pop(true);
-        Navigator.of(context).pop(true);
-        Navigator.of(context).pop(true);
-      });
+    //   Util.alert(context, "Error",
+    //           "Internal error occured. Please contact developer"
+    //   )
+    //       .then((val) async {
+    //     clearExeprop(digiPM);
+    //     SharedPreferences prefs = await SharedPreferences.getInstance();
+    //
+    //     digiPM.getUserTasklist({
+    //       'id_user': prefs.getString("id_user"),
+    //       'date': DateFormat("yyyy-MM-dd").format(digiPM.selectedDate)
+    //     }, context);
+    //
+    //     Navigator.of(context).pop(true);
+    //     Navigator.of(context).pop(true);
+    //     Navigator.of(context).pop(true);
+    //   });
     }
   }
 

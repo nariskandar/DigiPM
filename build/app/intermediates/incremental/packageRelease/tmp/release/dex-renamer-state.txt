@@ -1,0 +1,4 @@
+#Tue Feb 09 16:41:39 ICT 2021
+base.0=D\:\\Project\\digi_pm_skin\\build\\app\\intermediates\\transforms\\r8\\release\\0
+path.0=classes.dex
+renamed.0=classes.dex

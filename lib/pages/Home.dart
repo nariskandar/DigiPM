@@ -1,14 +1,15 @@
 import 'package:digi_pm_skin/api/webservice.dart';
 import 'package:digi_pm_skin/components/drawer.dart';
 import 'package:digi_pm_skin/components/statefulWapper.dart';
+import 'package:digi_pm_skin/fragments/abnormality/mainPageAbnormality.dart';
 import 'package:digi_pm_skin/fragments/assignment.dart';
 import 'package:digi_pm_skin/fragments/abnormality/abnormality_home.dart';
-// import 'package:digi_pm_skin/fragments/autonomous.dart';
-// import 'package:digi_pm_skin/fragments/breakdown.dart';
-// import 'package:digi_pm_skin/fragments/manyTask.dart';
+import 'package:digi_pm_skin/fragments/breakdown/mainPageBreakdown.dart';
+import 'package:digi_pm_skin/fragments/manytask/mainPageManyTask.dart';
 import 'package:digi_pm_skin/fragments/otif_line_manager.dart';
 import 'package:digi_pm_skin/fragments/spv_assignment.dart';
 import 'package:digi_pm_skin/fragments/user_management.dart';
+import 'package:digi_pm_skin/provider/abnormalityProvider.dart';
 import 'package:digi_pm_skin/provider/digiPMProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -30,7 +31,7 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     log("home rendered");
-    return Consumer<DigiPMProvider>(builder: (context, digiPM, __) {
+    return Consumer2<DigiPMProvider, AbnormalityProvider>(builder: (context, digiPM, abnormality, __) {
       return WillPopScope(
           onWillPop: () {
             return _onWillPop(context);
@@ -272,13 +273,13 @@ class Home extends StatelessWidget {
         case 4:
           return new UserManagement();
         case 5:
-          return new AbnormalityHome();
-        // case 6:
-        //   return new BreakdownPage();
+          return new MainPageAbnormality(caller: "tes");
+        case 6:
+          return new MainPageBreakdown();
         // case 7:
         //   return new AutonomousPage();
-        // case 8:
-        //   return new ManyTaskPage();
+        case 8:
+          return new MainPageManyTask();
         default:
           return null;
       }
@@ -287,6 +288,7 @@ class Home extends StatelessWidget {
 
   _onSelectItem(int index, DrawerItem drawerItem, DigiPMProvider digiPM,
       String selectedUid, context) async {
+
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     digiPM.drawerIndex = index;
@@ -333,6 +335,7 @@ class Home extends StatelessWidget {
             'date': DateFormat("yyyy-MM-dd").format(digiPM.selectedDate)
           }, context);
         }
+
         if (index == 10) {
           Navigator.of(context).pop(false);
           digiPM.setTaskbar = "DIGI PM - Individual Tasklist";
@@ -348,6 +351,7 @@ class Home extends StatelessWidget {
           await digiPM.getSupervisorTechnician(data);
           digiPM.setLoadingState(false);
         }
+
         if (index == 11) {
           Navigator.of(context).pop(false);
           digiPM.visibleReloadIndicator = true;
@@ -609,7 +613,11 @@ class Home extends StatelessWidget {
                 leading: new Icon(d.icon),
                 title: new Text(d.drawerTitle),
                 selected: i == digiPM.selectedDrawerIndex,
-                onTap: () async => _onSelectItem(i, d, digiPM, d.uid, context),
+                onTap: () async {
+                  _onSelectItem(i, d, digiPM, d.uid, context);
+                  print(d.uid);
+                  // print(_onSelectItem(i, d, digiPM, d.uid, context));
+                } ,
               ));
             }
           }

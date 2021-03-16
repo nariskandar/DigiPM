@@ -1,0 +1,34 @@
+{
+    "logs": [
+        {
+            "outputFile": "D:\\Project\\digi_pm_skin\\build\\sqflite\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-sq\\values-sq.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\asus\\.gradle\\caches\\transforms-1\\files-1.1\\core-1.1.0.aar\\ceb0ed300b631c62dc03252d68914ad6\\res\\values-sq\\values-sq.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "D:\\Project\\digi_pm_skin\\build\\sqflite\\intermediates\\res\\merged\\release\\values-sq\\values-sq.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\asus\\.gradle\\caches\\transforms-1\\files-1.1\\core-1.1.0.aar\\ceb0ed300b631c62dc03252d68914ad6\\res\\values-sq\\values-sq.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    }
+                }
+            ]
+        }
+    ]
+}

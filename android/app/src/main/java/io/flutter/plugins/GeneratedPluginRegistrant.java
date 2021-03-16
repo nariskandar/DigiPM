@@ -8,6 +8,7 @@ import io.flutter.plugins.imagepicker.ImagePickerPlugin;
 import io.flutter.plugins.packageinfo.PackageInfoPlugin;
 import io.flutter.plugins.pathprovider.PathProviderPlugin;
 import com.julienvignali.phone_number.PhoneNumberPlugin;
+import bsi.iceman.searchable_dropdown.SearchableDropdownPlugin;
 import io.flutter.plugins.sharedpreferences.SharedPreferencesPlugin;
 import com.tekartik.sqflite.SqflitePlugin;
 import io.flutter.plugins.videoplayer.VideoPlayerPlugin;
@@ -28,6 +29,7 @@ public final class GeneratedPluginRegistrant {
     PackageInfoPlugin.registerWith(registry.registrarFor("io.flutter.plugins.packageinfo.PackageInfoPlugin"));
     PathProviderPlugin.registerWith(registry.registrarFor("io.flutter.plugins.pathprovider.PathProviderPlugin"));
     PhoneNumberPlugin.registerWith(registry.registrarFor("com.julienvignali.phone_number.PhoneNumberPlugin"));
+    SearchableDropdownPlugin.registerWith(registry.registrarFor("bsi.iceman.searchable_dropdown.SearchableDropdownPlugin"));
     SharedPreferencesPlugin.registerWith(registry.registrarFor("io.flutter.plugins.sharedpreferences.SharedPreferencesPlugin"));
     SqflitePlugin.registerWith(registry.registrarFor("com.tekartik.sqflite.SqflitePlugin"));
     VideoPlayerPlugin.registerWith(registry.registrarFor("io.flutter.plugins.videoplayer.VideoPlayerPlugin"));

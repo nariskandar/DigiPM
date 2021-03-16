@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:digi_pm_skin/api/webservice.dart';
 import 'package:digi_pm_skin/components/drawer.dart';
 import 'package:flutter/foundation.dart';
@@ -18,7 +17,7 @@ class DigiPMProvider extends ChangeNotifier {
     new DrawerItem("DIGI PM - Line Trial PM", Icons.assignment, "Line Trial PM",
         "line_tr"),
     new DrawerItem("DIGI PM - Unconfirmed Execution", Icons.assignment,
-        "Unconfirmed Execution", "ufd_exe"),
+        "Unconfirmed Execution", "ufd_e../xe"),
     new DrawerItem("DIGI PM - User Management", Icons.account_circle,
         "User Management", "usermgmt"),
     // new DrawerItem("DIGI PM - Confirmed Execution", Icons.assignment,
@@ -32,8 +31,9 @@ class DigiPMProvider extends ChangeNotifier {
     new DrawerItem("DIGI PM - PM/AM/FI/QM/SHE TASK", Icons.assignment,
         "PM/AM/FI/QM/SHE TASK", "manyTask"),
     new DrawerItem("Logout", Icons.power_settings_new, "Logout", "logout"),
-
   ];
+
+  bool _isFormHome = true;
 
   String _activePicUrl;
   String _currentRole;
@@ -67,11 +67,6 @@ class DigiPMProvider extends ChangeNotifier {
   Map<String, dynamic> _selectedTasklist;
   Map<String, dynamic> _selectedExeTasklist;
 
-  Map<String, dynamic> _abnormalityProperty = {
-    'max_photo': 3,
-    'picture' : [{'img_path' : null, 'img' : null}],
-    'picture_counter': 0,
-  };
 
   Map<String, dynamic> _executionProperty = {
     'startExe': null,
@@ -139,11 +134,39 @@ class DigiPMProvider extends ChangeNotifier {
     'updateFromRating': false
   };
 
+  List<String> _nameMenu = [
+    "Sparepart Picklist By EWO Number",
+    "Abnormality PM03 Tasklist",
+    "Breakdown PM02 Tasklist",
+    "Tasklist Validation"
+  ];
+
+
+  List<String> _urlImages = [
+    "assets/icon/sparepart.png",
+    "assets/icon/mobile.png",
+    "assets/icon/mobile.png",
+    "assets/icon/approval.png"
+  ];
+
+  List<Color> _colorCard = [
+    Colors.red.withOpacity(0.7),
+    Colors.green.withOpacity(0.7),
+    Colors.orange.withOpacity(0.7),
+    Colors.deepPurple.withOpacity(0.7),
+  ];
+
+  List<String> get namaMenu => _nameMenu;
+  List<String> get urlImages => _urlImages;
+  List<Color> get colorCard => _colorCard;
+
   bool _isLoading = false;
   DateTime _selectedDate = DateTime.now();
   bool _displayFloatingButtonCamera = false;
 
   List _OtifListLineManager;
+
+  bool get navigatorPage => _isFormHome;
 
   List<DrawerItem> get drawer => _drawerItems;
 
@@ -176,7 +199,6 @@ class DigiPMProvider extends ChangeNotifier {
   Map<String, dynamic> get selectedTasklist => _selectedTasklist;
   Map<String, dynamic> get selectedExeTasklist => _selectedExeTasklist;
 
-  // Map<String, dynamic> get sb
 
   List<Tab> get tabExe => _tabExe;
   List<Tab> get tabSpvAssignment => _tabSpvAssignment;
@@ -184,6 +206,12 @@ class DigiPMProvider extends ChangeNotifier {
   bool get isLoading => _isLoading;
 
   bool get displayFloatingButtonCamera => _displayFloatingButtonCamera;
+
+  set FormHome(bool home){
+    _isFormHome = home;
+    notifyListeners();
+  }
+
 
   set ratingSelectedTasklist(double rating) {
     _ratingSelectedTasklist = rating;
@@ -302,10 +330,6 @@ class DigiPMProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  setAbnItem(String prop, value) {
-    _abnormalityProperty[prop] = value;
-    notifyListeners();
-  }
 
   setLoadingState(bool status) {
     _isLoading = status;
@@ -360,6 +384,8 @@ class DigiPMProvider extends ChangeNotifier {
     }
   }
 
+
+
   saveRating(data) async {
     var response = await Api.saveRating(data);
     return response;
@@ -379,22 +405,6 @@ class DigiPMProvider extends ChangeNotifier {
   getSupervisorTechnician(data) async {
     var response = await Api.getSupervisorTechnician(data);
     setlistUser(response);
-  }
-
-  getPictureAbnormality() async {
-    var image = await ImagePicker.pickImage(source: ImageSource.camera);
-    List<dynamic> newPhoto = [];
-    List<dynamic> photo = _abnormalityProperty['picture'];
-    int counter = _abnormalityProperty['picture'];
-    for (var i = 0; i < photo.length; i++) {
-      if (i == counter && photo[i]['img_path'] == null) {
-        newPhoto.add({'img_path': image.path, 'img': image});
-      } else {
-        newPhoto.add(photo[i]);
-      }
-    }
-    setAbnItem('picture_before', counter + 1);
-    setAbnItem('picture', newPhoto);
   }
 
 
@@ -428,6 +438,7 @@ class DigiPMProvider extends ChangeNotifier {
         newPhoto.add(photo[i]);
       }
     }
+
     setExeItem('photo_after_counter', counter + 1);
     setExeItem('photo_evidence_after', newPhoto);
   }
@@ -440,31 +451,25 @@ class DigiPMProvider extends ChangeNotifier {
     return Api.saveExecution(data);
   }
 
-
   Future<Null> selectDate(BuildContext context) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final now = DateTime.now();
-    int future, erlier;
-    if (now.weekday == 7) {
-      erlier = 1;
-      future = 7;
-    } else {
-      future = 7 - now.weekday;
-      erlier = 8 - future;
-    }
-    // future
-    final lastDayWeek = now.add(Duration(days: future));
-    // earlier
-    final firstDayWeek = now.subtract(Duration(
-        days: erlier,
-        hours: now.hour,
-        minutes: now.minute,
-        seconds: now.second));
 
+    DateTime firstDay(DateTime dateTime) {
+      return dateTime.subtract(Duration(days: dateTime.weekday - 1));
+    }
+
+    DateTime lastDay(DateTime dateTime) {
+      return dateTime.add(Duration(days: DateTime.daysPerWeek - dateTime.weekday));
+    }
+
+    var ear = firstDay(now);
+    var end = lastDay(now);
+    
     final DateTime picked = await showDatePicker(
       context: context,
-      firstDate: firstDayWeek,
-      lastDate: lastDayWeek,
+      firstDate: ear,
+      lastDate: end,
       initialDate: selectedDate,
     );
 
@@ -476,4 +481,31 @@ class DigiPMProvider extends ChangeNotifier {
       }, context);
     }
   }
+
+  //value
+  List<dynamic> _dataTimeline;
+  String _EWONumber;
+  //getter
+  List<dynamic> get dataTimeline => _dataTimeline;
+  String get EWONumber => _EWONumber;
+  //setter
+  setTimeline(List<dynamic> list){
+    _dataTimeline = list;
+    notifyListeners();
+  }
+  setEWONumber(String value){
+    _EWONumber = value;
+    notifyListeners();
+  }
+
+  getTimeline(dynamic ewoId, String pm_type) async {
+    var request = await Api.getTimeline(ewoId, pm_type);
+    print(request['data']);
+    print(request['0']['ewo_number']);
+    
+    setTimeline(request['data']);
+    setEWONumber(request['0']['ewo_number']);
+  }
+
+
 }

@@ -1,21 +1,13 @@
+import 'dart:async';
 import 'package:digi_pm_skin/api/webservice.dart';
-import 'package:digi_pm_skin/fragments/abnormality/edit_abnormality_form1.dart';
-import 'package:digi_pm_skin/fragments/abnormality/abnormality_tab.dart';
-import 'package:digi_pm_skin/fragments/abnormality/form_non_she.dart';
-import 'package:digi_pm_skin/fragments/abnormality/form_she.dart';
+
+
+import 'package:digi_pm_skin/fragments/timeline.dart';
 import 'package:digi_pm_skin/provider/digiPMProvider.dart';
-import 'package:digi_pm_skin/util/util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:incrementally_loading_listview/incrementally_loading_listview.dart';
-import 'dart:async';
-
-import 'package:digi_pm_skin/fragments/abnormality/abnormality_home.dart';
-
-import 'package:digi_pm_skin/fragments/abnormality/abnormality_form1.dart';
-import 'package:digi_pm_skin/fragments/abnormality/timeline_abnormality.dart';
 
 class Severity extends StatefulWidget {
   @override
@@ -46,14 +38,14 @@ class _SeverityState extends State<Severity> {
   List<Map<String, dynamic>> dataewo = [];
 
   void getEwo() async {
-    var listDataLine = await Api.getEwoList();
+    var listDataLine = await Api.getDataEwoList('PM03');
     setState(() {
       _dataEwo = listDataLine;
       _dataEwo.forEach((element) {
 
-        if (element['approve_by'] == null) {
+        if (element['APPROVED'] == null) {
           return;
-        } else {
+        } else if(element['SEVERITY'] == null){
           setState(() {
             dataewo.add(element);
           });
@@ -243,17 +235,32 @@ class _SeverityState extends State<Severity> {
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.end,
                                                 children: <Widget>[
-                                                      RaisedButton(
+                                                  RaisedButton(
+                                                    child: Text('History'),
+                                                    onPressed: () {
+                                                      Navigator.push(context, MaterialPageRoute(
+                                                          builder: (context) => Timeline(
+                                                              ewoId: dataewo[index]['id'],
+                                                              pm_type: 'PM03',
+                                                          )
+                                                      ));
+                                                    },
+                                                  ),
+                                                  SizedBox(
+                                                    width : 10,
+                                                  ),
+                                                  RaisedButton(
+                                                    color: Colors.green,
                                                         onPressed: () {
-                                                          dataewo[index]['related_to'] == "SHE" ?
-                                                          Navigator.push(context, MaterialPageRoute
-                                                            (builder: (context) => FormShe(data: dataewo[index],)))
-                                                              :
-                                                          Navigator.push(context, MaterialPageRoute
-                                                          (builder: (context) => FormNonShe(data: dataewo[index],)));
+                                                        //   dataewo[index]['related_to'] == "SHE" ?
+                                                        //   Navigator.push(context, MaterialPageRoute
+                                                        //     (builder: (context) => FormShe(data: dataewo[index],)))
+                                                        //       :
+                                                        //   Navigator.push(context, MaterialPageRoute
+                                                        //   (builder: (context) => FormNonShe(data: dataewo[index],)));
                                                         },
-                                                        child: Text('Set Severity'),
-                                                      )
+                                                        child: Text('Set Severity', style: TextStyle(color: Colors.white),),
+                                                      ),
                                                 ],
                                               ),
                                             ],
@@ -272,15 +279,6 @@ class _SeverityState extends State<Severity> {
               ),
             ],
           ),
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => AbnormalityForm1()),
-            );
-          },
-          child: Icon(Icons.add),
         ),
       );
     });

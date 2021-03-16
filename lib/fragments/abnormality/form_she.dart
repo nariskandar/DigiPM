@@ -1,23 +1,17 @@
 import 'package:digi_pm_skin/fragments/abnormality/abnormality_tab.dart';
 import 'package:digi_pm_skin/fragments/abnormality/edit_abnormality_form1.dart';
-import 'package:digi_pm_skin/fragments/abnormality/view_abnormality_form1.dart';
+import 'package:digi_pm_skin/fragments/abnormality/summary.dart';
+import 'package:digi_pm_skin/provider/abnormalityProvider.dart';
 import 'package:digi_pm_skin/provider/digiPMProvider.dart';
 import 'package:digi_pm_skin/api/webservice.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:grouped_buttons/grouped_buttons.dart';
 import 'popup.dart';
 import 'popup_content.dart';
-import 'abnormality_form1.dart';
 import 'package:intl/intl.dart';
-import 'package:digi_pm_skin/fragments/abnormality/tab_submitted.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import 'dart:io';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
-import 'package:image_picker/image_picker.dart';
+import 'package:digi_pm_skin/util/util.dart';
 
 class FormShe extends StatefulWidget {
   Map<String, dynamic> data;
@@ -93,7 +87,6 @@ class _FormSheState extends State<FormShe> {
       // dd-MM-yyyy
       final now = new DateTime.now();
       currentDate = DateFormat('yyyy-MM-dd').format(now);
-      _setEmployeeId();
       // getEwo(data);
     });
 
@@ -107,153 +100,252 @@ class _FormSheState extends State<FormShe> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<DigiPMProvider>(builder: (context, digiPM, __) {
-      return Scaffold(
-        appBar: AppBar(
-          title: Text('Form Severity - SHE'),
-        ),
-        body: Container(
-          child: Card(
-            margin: EdgeInsets.all(7),
-            color: Colors.white,
-            elevation: 5,
-            child: ListView(
-              children: <Widget>[
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    Container(
-                      padding: EdgeInsets.all(13),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Container(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  RaisedButton(
-                                    child: Text('print'),
-                                    onPressed: () {
-                                      print(data);
-                                    },
-                                  ),
-                                  Text(
-                                    'Risk Ranking Matrix',
-                                    style: TextStyle(
-                                        fontSize: 14, fontWeight: FontWeight.w700),
-                                  ),
-                                  Card(
-                                    // color: Colors.black12.withOpacity(0.1),
-                                      child: Padding(
-                                          padding: EdgeInsets.all(5.0),
-                                          child: Slider(
-                                            value: _riskRankingMatrix,
-                                            min: 0,
-                                            max: 10,
-                                            divisions: 5,
-                                            label: _riskRankingMatrix.round().toString(),
-                                            onChanged: (double value) {
-                                              setState(() {
-                                                _riskRankingMatrix = value;
-                                              });
-                                              getDataSeverity(_likelihoodOfHarm, _riskRankingMatrix, 'SHE');
-                                            },
-                                          )
-                                      ))
-                                ],
-                              )),
-                          SizedBox(height: 10,),
-                          Container(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Text(
-                                    'Likelihood Of Harm',
-                                    style: TextStyle(
-                                        fontSize: 14, fontWeight: FontWeight.w700),
-                                  ),
-                                  Card(
-                                      child: Padding(
-                                          padding: EdgeInsets.all(5.0),
-                                          child: Slider(
-                                            value: _likelihoodOfHarm,
-                                            min: 0,
-                                            max: 10,
-                                            divisions: 5,
-                                            label: _likelihoodOfHarm.round().toString(),
-                                            onChanged: (double value) {
-                                              setState(() {
-                                                _likelihoodOfHarm = value;
-                                              });
-                                              getDataSeverity(_likelihoodOfHarm, _riskRankingMatrix, 'SHE');
-                                            },
-                                          )
-                                      ))
-                                ],
-                              )),
-                          SizedBox(height: 10,),
-                          card(Colors.orangeAccent, dataSeverity ==  null ? " Severity Level : " : "Severity Level : " + dataSeverity['code'] ),
-                          SizedBox(height: 10,),
-                          card(dataSeverity == null ? Colors.green : dataSeverity['code_description'] == "Low" ? Colors.green : Colors.red, dataSeverity == null ? "-" : dataSeverity['code_description']),
-                          SizedBox(height: 30,),
-                          tittle('Current Date'),
-                          card(Colors.grey, '$currentDate', Icon(Icons.timer)),
-                          SizedBox(height: 10,),
-                          tittle('Timeline (week)'),
-                          card(Colors.grey, dataSeverity == null ? "-" : dataSeverity['number_of_weeks'] + ' Weeks'),
-                          SizedBox(height: 10,),
-                          tittle('Execution Date'),
-                          card(Colors.grey, executionDate == null ? "-" : executionDate, Icon(Icons.timer)),
-                        ],
+    return Consumer2<DigiPMProvider, AbnormalityProvider>(builder: (context, digiPM, abnormality, __) {
+      return WillPopScope(
+        onWillPop: (){
+          onDialogCancel(context, 'Confirmation', 'Do you want to go back to the previous page?', abnormality);
+        },
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text('Form Severity - SHE'),
+          ),
+          body: Container(
+            child: Card(
+              margin: EdgeInsets.all(7),
+              color: Colors.white,
+              elevation: 5,
+              child: ListView(
+                children: <Widget>[
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      Container(
+                        padding: EdgeInsets.all(13),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Container(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text(
+                                      'Risk Ranking Matrix',
+                                      style: TextStyle(
+                                          fontSize: 14, fontWeight: FontWeight.w700),
+                                    ),
+                                    Card(
+                                      // color: Colors.black12.withOpacity(0.1),
+                                        child: Padding(
+                                            padding: EdgeInsets.all(5.0),
+                                            child: Slider(
+                                              value: _riskRankingMatrix,
+                                              min: 0,
+                                              max: 10,
+                                              divisions: 5,
+                                              label: _riskRankingMatrix.round().toString(),
+                                              onChanged: (double value) {
+                                                setState(() {
+                                                  _riskRankingMatrix = value;
+                                                });
+                                                getDataSeverity(_likelihoodOfHarm, _riskRankingMatrix, 'SHE');
+                                              },
+                                            )
+                                        ))
+                                  ],
+                                )),
+                            SizedBox(height: 10,),
+                            Container(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text(
+                                      'Likelihood Of Harm',
+                                      style: TextStyle(
+                                          fontSize: 14, fontWeight: FontWeight.w700),
+                                    ),
+                                    Card(
+                                        child: Padding(
+                                            padding: EdgeInsets.all(5.0),
+                                            child: Slider(
+                                              value: _likelihoodOfHarm,
+                                              min: 0,
+                                              max: 10,
+                                              divisions: 5,
+                                              label: _likelihoodOfHarm.round().toString(),
+                                              onChanged: (double value) {
+                                                setState(() {
+                                                  _likelihoodOfHarm = value;
+                                                });
+                                                getDataSeverity(_likelihoodOfHarm, _riskRankingMatrix, 'SHE');
+                                              },
+                                            )
+                                        ))
+                                  ],
+                                )),
+                            SizedBox(height: 10,),
+                            card(Colors.orangeAccent, dataSeverity ==  null ? " Severity Level : " : "Severity Level : " + dataSeverity['code'] ),
+                            SizedBox(height: 10,),
+                            card(dataSeverity == null ? Colors.green : dataSeverity['code_description'] == "Low" ? Colors.green : Colors.red, dataSeverity == null ? "-" : dataSeverity['code_description']),
+                            SizedBox(height: 30,),
+                            tittle('Current Date'),
+                            card(Colors.grey, '$currentDate', Icon(Icons.timer)),
+                            SizedBox(height: 10,),
+                            tittle('Timeline (week)'),
+                            card(Colors.grey, dataSeverity == null ? "-" : dataSeverity['number_of_weeks'] + ' Weeks'),
+                            SizedBox(height: 10,),
+                            tittle('Execution Date'),
+                            card(Colors.grey, executionDate == null ? "-" : executionDate, Icon(Icons.timer)),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    RaisedButton.icon(
-                      onPressed: (){
-                        Navigator.push(context, MaterialPageRoute (builder: (context) => AbnormalityTab()));
-                      },
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                      label: Text('Cancel',
-                        style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700),),
-                      icon: Icon(Icons.cancel, color:Colors.white,),
-                      textColor: Colors.white,
-                      splashColor: Color.fromRGBO(18, 37, 63, 1.0),
-                      color: Colors.red,),
-                    RaisedButton.icon(
-                      onPressed: (){
-                        saveSeverity(context, digiPM);
-                      },
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                      label: Text('Save',
-                        style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700),),
-                      icon: Icon(Icons.save, color:Colors.white,),
-                      textColor: Colors.white,
-                      splashColor: Color.fromRGBO(18, 37, 63, 1.0),
-                      color: Colors.green,),
-                  ],
-                )
-              ],
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      RaisedButton.icon(
+                        onPressed: (){
+                          onDialogCancel(context, 'Confirmation', 'Do you want to go back to the previous page?', abnormality);
+                        },
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10.0))),
+                        label: Text('Cancel',
+                          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700),),
+                        icon: Icon(Icons.cancel, color:Colors.white,),
+                        textColor: Colors.white,
+                        splashColor: Color.fromRGBO(18, 37, 63, 1.0),
+                        color: Colors.red,),
+                      RaisedButton.icon(
+                        onPressed: (){
+                          onValidateForm(context, abnormality);
+                        },
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10.0))),
+                        label: Text('Save',
+                          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700),),
+                        icon: Icon(Icons.save, color:Colors.white,),
+                        textColor: Colors.white,
+                        splashColor: Color.fromRGBO(18, 37, 63, 1.0),
+                        color: Colors.green,),
+                    ],
+                  )
+                ],
+              ),
             ),
           ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              showPopup(context, _popupBody(), 'Popup Demo');
+            },
+            heroTag: "demoValue",
+            tooltip: 'Severity Level',
+            child: Icon(Icons.info),
+          ), // This trailing comma makes auto-formatting nicer for build methods.// This trailing comma makes auto-formatting nicer for build methods.
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            showPopup(context, _popupBody(), 'Popup Demo');
-          },
-          heroTag: "demoValue",
-          tooltip: 'Severity Level',
-          child: Icon(Icons.info),
-        ), // This trailing comma makes auto-formatting nicer for build methods.// This trailing comma makes auto-formatting nicer for build methods.
       );
     });
   }
+
+  onValidateForm(BuildContext context, AbnormalityProvider abnormality){
+    if(_likelihoodOfHarm == 0){
+      Util.alert(
+          context,
+          "Validation Error",
+          "Please Fill Likeihood of Harm");
+      return null;
+    }
+    if(_riskRankingMatrix == 0){
+      Util.alert(
+          context,
+          "Validation Error",
+          "Please FillRisk Ranking Matrix");
+      return null;
+    }
+
+    return onDialogSave(context, 'Confirmation', 'Do data have been filled in correctly?', abnormality);
+  }
+
+  onDialogSave(
+      BuildContext context, String title, String content, AbnormalityProvider abnormality) {
+    return showDialog<void>(
+      barrierDismissible: false,
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('$title'),
+          content: Text('$content'),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            FlatButton(
+                child: Text('Ok'),
+                onPressed: () {
+                  saveForm(context, abnormality);
+                }
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  saveForm(BuildContext context, AbnormalityProvider abnormality) async {
+    Util.loader(context, "", "Saving...");
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    final data = {
+      "id" : null,
+      "ewo_id" : widget.data['id'],
+      "severity_id": dataSeverity['id'],
+      "current_date": currentDate,
+      "execution_date": executionDate,
+      "created_by": prefs.getString('id_user'),
+    };
+
+    try {
+      abnormality.saveSeverity(data).then((val) async {
+        // SharedPreferences prefs = await SharedPreferences.getInstance();
+        print(val);
+        // if(val == "timeout") {
+        //   Util.alert(context, "Error", "Network error. please check your internet network").then((val)  {
+        //     Navigator.of(context).pop(true);
+        //     Navigator.of(context).pop(true);
+        //   });
+        // }
+        //
+        // if (val == "offline") {
+        //   Util.alert(context, "Error", "Network error. please check your internet network").then((val) {
+        //     Navigator.of(context).pop(true);
+        //     Navigator.of(context).pop(true);
+        //   });
+        // }
+
+        // var res = jsonDecode(val);
+        // print(res['code_status']);
+        if(val['code_status'] == 1){
+          // print('oke');
+          Navigator.of(context);
+          Navigator.of(context);
+          await Util.alert(context, "Success", "You have saved the Severity Form", 'submissionPM03');
+          dataRefresher(abnormality);
+
+        }
+
+      });
+    } catch (e){
+      Util.alert(context, "error", "Internal error occured. Please contact developer").then((value) async {
+        Navigator.pop(context);
+        dataRefresher(abnormality);
+      });
+    }
+  }
+
+
 
   Widget tittle (String text){
     return Padding(
@@ -300,58 +392,6 @@ class _FormSheState extends State<FormShe> {
     );
   }
 
-  String valEmployeeId;
-
-  Future<String> _setEmployeeId() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    var employeeId = prefs.getString("id_user");
-    setState(() {
-      valEmployeeId = employeeId;
-    });
-  }
-
-
-  saveSeverity(context, DigiPMProvider digiPM) {
-    final data = {
-      "id" : null,
-      "ewo_id" : widget.data['id'],
-      "severity_id": dataSeverity['id'],
-      "current_date": currentDate,
-      "execution_date": executionDate,
-      "created_by": valEmployeeId,
-    };
-
-    Api.saveSeverity(data).then((value)  {
-      setState(() {
-        if(value['code_status'] == 1){
-          alert(context, "Success", "You have submit severity form");
-        }
-      });
-    });
-  }
-
-  static Future<void> alert(
-      BuildContext context, String title, String content) {
-    return showDialog<void>(
-      barrierDismissible: false,
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('$title'),
-          content: Text('$content'),
-          actions: <Widget>[
-            FlatButton(
-              child: Text('Ok'),
-              onPressed: () {
-                Navigator.push(context, MaterialPageRoute (builder: (context) => AbnormalityTab()));
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
-
 
   showPopup(BuildContext context, Widget widget, String title,
       {BuildContext AbnormalityFormView1}) {
@@ -388,8 +428,43 @@ class _FormSheState extends State<FormShe> {
 
   Widget _popupBody() {
     return Container(
-      child: ViewAbnormalityForm1(data: widget.data,),
+      child: Summary(data: widget.data,),
     );
+  }
+
+  onDialogCancel(
+      BuildContext context, String title, String content, AbnormalityProvider abnormality) {
+    return showDialog<void>(
+      barrierDismissible: false,
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('$title'),
+          content: Text('$content'),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('No'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            FlatButton(
+                child: Text('Yes'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).pop();
+                }
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void dataRefresher(AbnormalityProvider abnormality) async {
+    abnormality.setLoadingState(true);
+    await abnormality.getEWO(context,'PM03');
+    abnormality.setLoadingState(false);
   }
 
 
